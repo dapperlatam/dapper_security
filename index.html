@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dapper Security | Desobediencia Civil — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0A0B1A;
+    --bg-1:#12142E;
+    --bg-2:#181B3A;
+    --purple:#5723F5;
+    --purple-light:#7861DB;
+    --purple-glow: rgba(87,35,245,0.45);
+    --green:#84CC16;
+    --blue:#2A9BD6;
+    --amber:#E2A03A;
+    --gray:#64748B;
+    --gray-light:#CBD5E1;
+    --text-hi:#F4F5FA;
+    --text-mid:#B7BAD1;
+    --text-dim:#7A7D9C;
+    --border: rgba(120,97,219,0.25);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(87,35,245,0.18), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(42,155,214,0.10), transparent 55%),
+      var(--bg-0);
+    color:var(--text-hi);
+    font-family:'Segoe UI', Arial, sans-serif;
+    min-height:100vh;
+  }
+  header{
+    padding:28px 40px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand .d{
+    font-family:'Raleway', sans-serif;
+    font-weight:800;
+    font-size:26px;
+    color:var(--purple-light);
+  }
+  .brand .name{
+    font-family:'Raleway', sans-serif;
+    font-weight:700;
+    font-size:22px;
+    letter-spacing:0.3px;
+  }
+  .brand .tag{
+    font-size:12px;
+    color:var(--text-dim);
+    margin-left:10px;
+    border-left:1px solid var(--border);
+    padding-left:10px;
+  }
+  h1.title{
+    font-family:'Raleway', sans-serif;
+    font-weight:700;
+    font-size:22px;
+    margin:4px 0 0;
+    color:var(--text-hi);
+  }
+  .subtitle{
+    color:var(--text-dim);
+    font-size:13px;
+    margin-top:4px;
+  }
+  nav.tabs{
+    display:flex;
+    gap:6px;
+    padding:18px 40px 0;
+  }
+  nav.tabs button{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text-mid);
+    font-family:'Segoe UI', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    padding:10px 18px;
+    border-radius:8px 8px 0 0;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  nav.tabs button.active{
+    background:var(--bg-1);
+    color:var(--text-hi);
+    border-color:var(--purple-light);
+    box-shadow: 0 -2px 12px var(--purple-glow);
+  }
+  nav.tabs button:hover:not(.active){
+    color:var(--text-hi);
+    border-color:var(--gray);
+  }
+  main{
+    padding:0 40px 60px;
+  }
+  section.panel{
+    display:none;
+    background:var(--bg-1);
+    border:1px solid var(--border);
+    border-top:none;
+    border-radius:0 0 14px 14px;
+    padding:28px;
+  }
+  section.panel.active{display:block;}
+  .panel-head{
+    margin-bottom:22px;
+  }
+  .panel-head h2{
+    font-family:'Raleway', sans-serif;
+    font-size:19px;
+    font-weight:700;
+    margin:0 0 4px;
+  }
+  .panel-head p{
+    color:var(--text-dim);
+    font-size:13px;
+    margin:0;
+    max-width:760px;
+    line-height:1.5;
+  }
+  .map-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  @media (max-width:1100px){ .map-grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--bg-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    min-height:520px;
+  }
+  .card h3{
+    font-family:'Raleway', sans-serif;
+    font-size:15px;
+    font-weight:700;
+    margin:0 0 2px;
+  }
+  .card .desc{
+    font-size:12px;
+    color:var(--text-dim);
+    margin:0 0 12px;
+    line-height:1.45;
+  }
+  .card .mapwrap{
+    position:relative;
+    flex:1;
+    min-height:340px;
+  }
+  .card svg{width:100%; height:100%; display:block;}
+  .mpio-path{
+    stroke: rgba(10,11,26,0.7);
+    stroke-width:0.4;
+    transition:opacity .12s ease;
+  }
+  .mpio-path:hover{
+    opacity:0.75;
+    stroke:#fff;
+    stroke-width:1;
+  }
+  .legend{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:11px;
+    color:var(--text-dim);
+    margin-top:10px;
+    flex-wrap:wrap;
+  }
+  .legend .swatch{
+    width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-2px;
+  }
+  .legend-grad{
+    height:8px;
+    width:140px;
+    border-radius:4px;
+    background:linear-gradient(90deg,#2A9BD6, #384066 50%, #E2A03A);
+  }
+  .stat-row{
+    display:flex;
+    gap:14px;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    background:rgba(87,35,245,0.10);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:8px 12px;
+    font-size:12px;
+    color:var(--text-mid);
+  }
+  .stat b{
+    display:block;
+    font-family:'Raleway', sans-serif;
+    font-size:17px;
+    color:var(--text-hi);
+    font-weight:700;
+  }
+  .tooltip{
+    position:fixed;
+    pointer-events:none;
+    background:rgba(10,11,26,0.96);
+    border:1px solid var(--purple-light);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:12px;
+    color:var(--text-hi);
+    box-shadow:0 4px 20px rgba(0,0,0,0.5);
+    opacity:0;
+    transition:opacity .1s ease;
+    z-index:50;
+    max-width:220px;
+  }
+  .tooltip .t-title{font-weight:700; margin-bottom:4px; font-family:'Raleway',sans-serif;}
+  .tooltip .t-row{display:flex; justify-content:space-between; gap:12px; color:var(--text-mid);}
+  .placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:1;
+    color:var(--text-dim);
+    font-size:13px;
+    border:1px dashed var(--border);
+    border-radius:10px;
+    text-align:center;
+    padding:20px;
+  }
+  footer.source{
+    margin-top:16px;
+    font-size:11px;
+    color:var(--text-dim);
+    border-top:1px solid var(--border);
+    padding-top:10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="brand">
+      <span class="d">D</span><span class="name">apper Security</span>
+      <span class="tag">Desobediencia civil — Colombia y Perú</span>
+    </div>
+    <h1 class="title">Dashboard de riesgo territorial</h1>
+    <p class="subtitle">Primer approach de producto · Inteligencia de riesgo político · Julio 2026</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="t1">1. Contexto post-elecciones</button>
+  <button class="tab-btn" data-tab="t2">2. Evolución de la conversación</button>
+  <button class="tab-btn" data-tab="t3">3. Riesgo territorial</button>
+</nav>
+
+<main>
+
+  <section class="panel active" id="t1">
+    <div class="panel-head">
+      <h2>Contexto post-elecciones</h2>
+      <p>Resultados de la segunda vuelta presidencial 2026 a nivel municipio, nivel de polarización electoral y conflictividad social registrada en 2025, como línea base antes de las posesiones del 28 de julio (Perú) y el 7 de agosto (Colombia).</p>
+    </div>
+    <div class="map-grid">
+
+      <div class="card">
+        <h3>Votos por municipio: Abelardo vs. Cepeda</h3>
+        <p class="desc">Segunda vuelta presidencial 2026. Color por candidato ganador, intensidad según el margen de victoria.</p>
+        <div class="mapwrap" id="map-votos"></div>
+        <div class="legend">
+          <span><span class="swatch" style="background:#E2A03A"></span>Abelardo</span>
+          <span class="legend-grad"></span>
+          <span><span class="swatch" style="background:#2A9BD6"></span>Cepeda</span>
+        </div>
+        <div class="stat-row" id="stats-votos"></div>
+        <footer class="source">Fuente: Dapper con datos de la Registraduría Nacional del Estado Civil.</footer>
+      </div>
+
+      <div class="card">
+        <h3>Polarización electoral</h3>
+        <p class="desc">Próximamente.</p>
+        <div class="placeholder">Mapa 2 en construcción</div>
+      </div>
+
+      <div class="card">
+        <h3>Conflictividad social 2025</h3>
+        <p class="desc">Próximamente.</p>
+        <div class="placeholder">Mapa 3 en construcción</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="panel" id="t2">
+    <div class="panel-head">
+      <h2>Evolución de la conversación</h2>
+      <p>Próximamente: análisis de X y Google Trends.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="t3">
+    <div class="panel-head">
+      <h2>Riesgo territorial</h2>
+      <p>Próximamente: clasificación de riesgo alto, medio y bajo por municipio.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script src="lib/d3.min.js"></script>
+<script src="lib/topojson-client.min.js"></script>
+<script>
+// tabs
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+const tooltip = document.getElementById('tooltip');
+function showTip(html, x, y){
+  tooltip.innerHTML = html;
+  tooltip.style.left = (x+14)+'px';
+  tooltip.style.top = (y+14)+'px';
+  tooltip.style.opacity = 1;
+}
+function hideTip(){ tooltip.style.opacity = 0; }
+
+Promise.all([
+  fetch('data/co_topo.json').then(r=>r.json()),
+  fetch('data/votes.json').then(r=>r.json())
+]).then(([topo, votes])=>{
+
+  const mpios = topojson.feature(topo, topo.objects.mpios);
+
+  function drawMapVotos(){
+    const el = document.getElementById('map-votos');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], mpios);
+    const path = d3.geoPath(projection);
+
+    // color scale: diverging by margin, blue (cepeda) to amber (espriella)
+    const colorScale = d3.scaleLinear()
+      .domain([-60, 0, 60])
+      .range(['#2A9BD6', '#384066', '#E2A03A'])
+      .clamp(true);
+
+    svg.selectAll('path')
+      .data(mpios.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = votes[d.id];
+        if(!v) return '#2c2f52';
+        return colorScale(v.margin);
+      })
+      .on('mousemove', (event,d)=>{
+        const v = votes[d.id];
+        if(!v){ hideTip(); return; }
+        const html = `<div class="t-title">${v.mpio}</div>
+          <div style="color:var(--text-dim); margin-bottom:6px;">${v.dpto}</div>
+          <div class="t-row"><span>Abelardo</span><span>${v.espriella_pct}%</span></div>
+          <div class="t-row"><span>Cepeda</span><span>${v.cepeda_pct}%</span></div>
+          <div class="t-row"><span>Participación</span><span>${v.participacion}%</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    // stats
+    const vals = Object.values(votes);
+    const wonEspriella = vals.filter(v=>v.winner==='espriella').length;
+    const wonCepeda = vals.filter(v=>v.winner==='cepeda').length;
+    const totE = vals.reduce((a,v)=>a+v.espriella,0);
+    const totC = vals.reduce((a,v)=>a+v.cepeda,0);
+    const pctE = (totE/(totE+totC)*100).toFixed(1);
+    const pctC = (totC/(totE+totC)*100).toFixed(1);
+    document.getElementById('stats-votos').innerHTML = `
+      <div class="stat"><b>${pctE}%</b>Abelardo (${wonEspriella} municipios)</div>
+      <div class="stat"><b>${pctC}%</b>Cepeda (${wonCepeda} municipios)</div>
+    `;
+  }
+
+  drawMapVotos();
+  window.addEventListener('resize', ()=>{
+    document.getElementById('map-votos').innerHTML='';
+    drawMapVotos();
+  });
+
+}).catch(err=>{
+  console.error(err);
+  document.getElementById('map-votos').innerHTML = '<p style="color:#E2A03A;font-size:12px;">Error cargando datos: '+err.message+'</p>';
+});
+</script>
+
+</body>
+</html>
