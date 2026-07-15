@@ -238,6 +238,82 @@
     text-align:center;
     padding:20px;
   }
+  .conf-top{
+    display:flex;
+    gap:20px;
+    flex:1;
+    min-height:480px;
+  }
+  .conf-top .mapwrap{
+    flex:2;
+    min-height:480px;
+  }
+  .conf-stat-box{
+    flex:1;
+    background:linear-gradient(160deg, var(--purple) 0%, #1D0C52 100%);
+    border-radius:12px;
+    padding:22px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:4px;
+    min-width:170px;
+    max-width:230px;
+  }
+  .conf-big{
+    font-family:'Raleway', sans-serif;
+    font-weight:800;
+    font-size:34px;
+    color:#fff;
+    line-height:1;
+  }
+  .conf-big2{
+    font-family:'Raleway', sans-serif;
+    font-weight:800;
+    font-size:26px;
+    color:#fff;
+    margin-top:14px;
+  }
+  .conf-big-label{
+    font-size:12px;
+    color:rgba(255,255,255,0.85);
+    line-height:1.4;
+    margin-bottom:4px;
+  }
+  .conf-bottom{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:18px;
+    background:rgba(226,160,58,0.08);
+    border:1px solid rgba(226,160,58,0.3);
+    border-radius:10px;
+    padding:16px 20px;
+  }
+  .conf-col h4{
+    font-family:'Raleway', sans-serif;
+    font-size:14px;
+    font-weight:700;
+    margin:0 0 10px;
+    color:var(--amber);
+  }
+  .conf-item{
+    font-size:12px;
+    color:var(--text-mid);
+    margin-bottom:7px;
+    line-height:1.4;
+  }
+  .conf-item b{
+    color:var(--text-hi);
+    font-family:'Raleway', sans-serif;
+    font-size:14px;
+    margin-right:5px;
+  }
+  @media (max-width:800px){
+    .conf-top{flex-direction:column;}
+    .conf-bottom{grid-template-columns:1fr;}
+  }
   footer.source{
     margin-top:16px;
     font-size:11px;
@@ -301,10 +377,46 @@
         <footer class="source">Fuente: Dapper con datos de la Registraduría Nacional del Estado Civil.</footer>
       </div>
 
-      <div class="card">
+      <div class="card" id="card-conflictividad">
         <h3>Conflictividad social 2025</h3>
-        <p class="desc">Próximamente.</p>
-        <div class="placeholder">Mapa 3 en construcción</div>
+        <p class="desc">Eventos de conflictividad social registrados por departamento durante 2025.</p>
+        <div class="conf-top">
+          <div class="mapwrap" id="map-conflictividad"></div>
+          <div class="conf-stat-box">
+            <div class="conf-big">4.039</div>
+            <div class="conf-big-label">eventos en<br>32 departamentos<br>y el D.C.</div>
+            <div class="conf-big2">536</div>
+            <div class="conf-big-label">municipios</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span>Menos eventos</span>
+          <span class="legend-grad" id="legend-conf" style="background:linear-gradient(90deg,#2c2f52,#5723F5,#E34948)"></span>
+          <span>Más eventos</span>
+        </div>
+        <div class="conf-bottom">
+          <div class="conf-col">
+            <h4>Mecanismos</h4>
+            <div class="conf-item"><b>41%</b> Bloqueos o cortes de ruta</div>
+            <div class="conf-item"><b>39%</b> Plantones/concentraciones</div>
+            <div class="conf-item"><b>5%</b> Marchas/movilizaciones</div>
+            <div class="conf-item"><b>15%</b> Otros</div>
+          </div>
+          <div class="conf-col">
+            <h4>Tipología</h4>
+            <div class="conf-item"><b>18%</b> Laborales/derecho al trabajo</div>
+            <div class="conf-item"><b>13%</b> Servicios públicos</div>
+            <div class="conf-item"><b>12%</b> Presencia e inversión estatal</div>
+            <div class="conf-item"><b>11%</b> Educación</div>
+          </div>
+          <div class="conf-col">
+            <h4>Gestión defensorial</h4>
+            <div class="conf-item"><b>384</b> espacios de diálogo</div>
+            <div class="conf-item"><b>1.008</b> personas capacitadas</div>
+            <div class="conf-item"><b>56</b> acuerdos en seguimiento</div>
+          </div>
+        </div>
+        <footer class="source">Fuente: Defensoría del Pueblo, 2026.</footer>
       </div>
 
     </div>
@@ -353,10 +465,12 @@ function hideTip(){ tooltip.style.opacity = 0; }
 Promise.all([
   fetch('data/co_topo.json').then(r=>r.json()),
   fetch('data/votes.json').then(r=>r.json()),
-  fetch('data/polarizacion.json').then(r=>r.json())
-]).then(([topo, votes, polarizacion])=>{
+  fetch('data/polarizacion.json').then(r=>r.json()),
+  fetch('data/conflictividad.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion, conflictividad])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
+  const depts = topojson.feature(topo, topo.objects.depts);
 
   function drawMapVotos(){
     const el = document.getElementById('map-votos');
@@ -453,11 +567,47 @@ Promise.all([
     `;
   }
 
+  function drawMapConflictividad(){
+    const el = document.getElementById('map-conflictividad');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], depts);
+    const path = d3.geoPath(projection);
+
+    const vals = Object.values(conflictividad).filter(v=>v!=null);
+    const maxV = d3.max(vals);
+    const colorScale = d3.scaleLinear()
+      .domain([0, maxV*0.35, maxV])
+      .range(['#2c2f52', '#5723F5', '#E34948'])
+      .clamp(true);
+
+    svg.selectAll('path')
+      .data(depts.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = conflictividad[d.properties.dpt];
+        if(v==null) return '#2c2f52';
+        return colorScale(v);
+      })
+      .on('mousemove', (event,d)=>{
+        const v = conflictividad[d.properties.dpt];
+        const label = d.properties.dpt.replace('SANTAFE DE BOGOTA D.C','BOGOTÁ D.C.').replace('ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA','SAN ANDRÉS Y PROVIDENCIA');
+        const html = `<div class="t-title">${label}</div>
+          <div class="t-row"><span>Eventos 2025</span><span>${v!=null?v:'sin datos'}</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+  }
+
   function drawAll(){
     document.getElementById('map-votos').innerHTML='';
     document.getElementById('map-polarizacion').innerHTML='';
+    document.getElementById('map-conflictividad').innerHTML='';
     drawMapVotos();
     drawMapPolarizacion();
+    drawMapConflictividad();
   }
 
   drawAll();
