@@ -314,6 +314,67 @@
     .conf-top{flex-direction:column;}
     .conf-bottom{grid-template-columns:1fr;}
   }
+  .section-sub{
+    font-family:'Raleway', sans-serif;
+    font-size:16px;
+    font-weight:700;
+    color:var(--purple-light);
+    margin:6px 0 16px;
+    padding-top:6px;
+  }
+  .chart-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+    margin-bottom:30px;
+  }
+  @media (max-width:1000px){ .chart-grid{grid-template-columns:1fr;} }
+  .chart-card{
+    background:var(--bg-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 20px;
+    display:flex;
+    flex-direction:column;
+  }
+  .chart-card h4{
+    font-family:'Raleway', sans-serif;
+    font-size:14px;
+    font-weight:700;
+    margin:0 0 3px;
+  }
+  .chart-card .desc{
+    font-size:12px;
+    color:var(--text-dim);
+    margin:0 0 8px;
+    line-height:1.45;
+  }
+  .method-note{
+    font-size:11px;
+    color:var(--purple-light);
+    background:rgba(87,35,245,0.10);
+    border-left:2px solid var(--purple-light);
+    padding:6px 10px;
+    margin-bottom:12px;
+    line-height:1.5;
+    border-radius:0 6px 6px 0;
+  }
+  .method-note b{color:var(--text-hi);}
+  .chart-wrap{
+    position:relative;
+    width:100%;
+    height:260px;
+  }
+  .chart-wrap.tall{height:340px;}
+  .chart-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:11px;
+    color:var(--text-dim);
+    margin-bottom:8px;
+  }
+  .chart-legend .sw{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:-1px;}
   footer.source{
     margin-top:16px;
     font-size:11px;
@@ -425,7 +486,135 @@
   <section class="panel" id="t2">
     <div class="panel-head">
       <h2>Evolución de la conversación</h2>
-      <p>Próximamente: análisis de X y Google Trends.</p>
+      <p>Análisis de la conversación en X y de Google Trends sobre "desobediencia civil" e "insurgencia civil" en Colombia y Perú. Cada gráfica indica cómo se calculó o en qué escala están los datos.</p>
+    </div>
+
+    <div class="section-sub">Conversación en X</div>
+    <div class="chart-grid">
+
+      <div class="chart-card" style="grid-column:1/-1;">
+        <h4>Volumen mensual de tweets</h4>
+        <p class="desc">Cantidad de tweets por mes que mencionan el término, Colombia vs. Perú.</p>
+        <div class="method-note"><b>Cómo se calculó:</b> conteo de tweets filtrados estrictamente por ubicación declarada del autor (Colombia o Perú). Muestra de 235 tweets sobre un total de 554 extraídos del último año; el resto se descartó por no tener ubicación identificable.</div>
+        <div class="chart-legend">
+          <span><span class="sw" style="background:#2a78d6"></span>Colombia</span>
+          <span><span class="sw" style="background:#e34948"></span>Perú</span>
+        </div>
+        <div class="chart-wrap tall"><canvas id="ch-x-monthly"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Verificadas vs. no verificadas</h4>
+        <p class="desc">Proporción de tweets según si la cuenta autora tiene verificación paga (blue check).</p>
+        <div class="method-note"><b>Escala:</b> conteo absoluto de tweets por tipo de cuenta, sobre el total de la muestra filtrada por país (118 Colombia, 117 Perú).</div>
+        <div class="chart-wrap"><canvas id="ch-x-verified"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Tono predominante</h4>
+        <p class="desc">Clasificación del tono de cada tweet: crítico/alarmista, favorable/legitimador o neutro/informativo.</p>
+        <div class="method-note"><b>Cómo se calculó:</b> clasificador heurístico por palabras clave, no es un modelo de sentimiento entrenado. Es una primera lectura direccional.</div>
+        <div class="chart-wrap"><canvas id="ch-x-tone"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Palabras más frecuentes: Colombia</h4>
+        <p class="desc">Palabras más repetidas en los tweets de Colombia, tras remover palabras vacías.</p>
+        <div class="method-note"><b>Nota:</b> se excluyeron los términos de búsqueda mismos (desobediencia, civil). Conteo absoluto de menciones.</div>
+        <div class="chart-wrap tall"><canvas id="ch-words-co"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Palabras más frecuentes: Perú</h4>
+        <p class="desc">Palabras más repetidas en los tweets de Perú, tras remover palabras vacías.</p>
+        <div class="method-note"><b>Nota:</b> se excluyeron los términos de búsqueda mismos (insurgencia, civil). Conteo absoluto de menciones.</div>
+        <div class="chart-wrap tall"><canvas id="ch-words-pe"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Engagement promedio por tweet</h4>
+        <p class="desc">Promedio de interacción según tipo de cuenta.</p>
+        <div class="method-note"><b>Cómo se calculó:</b> engagement = likes + (retweets × 2) + respuestas + citas, promediado por tweet. El promedio puede estar inflado por tweets virales puntuales; no representa el tweet "típico".</div>
+        <div class="chart-wrap"><canvas id="ch-eng-avg"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Participación en el engagement total</h4>
+        <p class="desc">Qué porcentaje del engagement acumulado total aporta cada tipo de cuenta.</p>
+        <div class="method-note"><b>Escala:</b> porcentaje sobre la suma total de engagement (no el promedio) de cada país.</div>
+        <div class="chart-wrap"><canvas id="ch-eng-share"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Niveles de engagement</h4>
+        <p class="desc">Cantidad de tweets clasificados como bajo, medio o alto engagement.</p>
+        <div class="method-note"><b>Cómo se calculó:</b> umbrales por percentiles de la muestra combinada Colombia+Perú. Bajo = 0-31 puntos (por debajo de la mediana). Medio = 32-406 (mediana a percentil 85). Alto = 407 o más (percentil 85 en adelante).</div>
+        <div class="chart-wrap"><canvas id="ch-eng-tiers"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Comentarios: ¿incitan o rechazan el llamado?</h4>
+        <p class="desc">Clasificación de las respuestas (replies) dentro de las conversaciones capturadas: 44 en Colombia, 32 en Perú.</p>
+        <div class="method-note"><b>Cómo se calculó:</b> clasificador heurístico por palabras clave de incitación (paro, marcha, organicémonos) o de rechazo (ridículo, mentira, payasada). Muestra pequeña, lectura direccional.</div>
+        <div class="chart-wrap"><canvas id="ch-replies"></canvas></div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre extracción de X (Twitter).</footer>
+      </div>
+
+    </div>
+
+    <div class="section-sub">Google Trends</div>
+    <div class="chart-grid">
+
+      <div class="chart-card">
+        <h4>Colombia: interés de búsqueda por año</h4>
+        <p class="desc">Evolución 2004-2026 de las consultas "desobediencia civil" y "qué es desobediencia civil".</p>
+        <div class="method-note"><b>Escala:</b> cada consulta va de 0 a 100 respecto a su propio máximo histórico; no son sumables entre sí. El índice combinado es un promedio simple de las dos series ya normalizadas, útil como lectura direccional, no como volumen real de búsqueda.</div>
+        <div class="chart-legend">
+          <span><span class="sw" style="background:#2a78d6"></span>desobediencia civil</span>
+          <span><span class="sw" style="background:#4a3aa7"></span>qué es desobediencia civil</span>
+          <span><span class="sw" style="background:#888780"></span>índice combinado*</span>
+        </div>
+        <div class="chart-wrap tall"><canvas id="ch-trends-co"></canvas></div>
+        <footer class="source">Fuente: Dapper con datos de Google Trends.</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Perú: interés de búsqueda por año</h4>
+        <p class="desc">Evolución 2004-2026 de las consultas "desobediencia civil" y "qué es desobediencia civil".</p>
+        <div class="method-note"><b>Escala:</b> misma metodología que Colombia; cada consulta normalizada 0-100 a su propio máximo histórico. El pico de la consulta exploratoria ocurre en 2020-2022, no en 2026.</div>
+        <div class="chart-legend">
+          <span><span class="sw" style="background:#e34948"></span>desobediencia civil</span>
+          <span><span class="sw" style="background:#993C1D"></span>qué es desobediencia civil</span>
+          <span><span class="sw" style="background:#888780"></span>índice combinado*</span>
+        </div>
+        <div class="chart-wrap tall"><canvas id="ch-trends-pe"></canvas></div>
+        <footer class="source">Fuente: Dapper con datos de Google Trends.</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Regiones con mayor interés: Colombia</h4>
+        <p class="desc">Departamentos ordenados por índice de interés combinado.</p>
+        <div class="method-note"><b>Escala:</b> índice de interés relativo 0-100 por departamento, promedio de las dos consultas ya normalizadas por Google Trends. No es volumen absoluto de búsquedas.</div>
+        <div class="chart-wrap tall" style="height:420px;"><canvas id="ch-trends-reg-co"></canvas></div>
+        <footer class="source">Fuente: Dapper con datos de Google Trends.</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Regiones con mayor interés: Perú</h4>
+        <p class="desc">Departamentos ordenados por índice de interés combinado.</p>
+        <div class="method-note"><b>Escala:</b> índice de interés relativo 0-100 por departamento, promedio de las dos consultas ya normalizadas por Google Trends. No es volumen absoluto de búsquedas.</div>
+        <div class="chart-wrap tall" style="height:420px;"><canvas id="ch-trends-reg-pe"></canvas></div>
+        <footer class="source">Fuente: Dapper con datos de Google Trends.</footer>
+      </div>
+
     </div>
   </section>
 
@@ -442,6 +631,7 @@
 
 <script src="lib/d3.min.js"></script>
 <script src="lib/topojson-client.min.js"></script>
+<script src="lib/chart.umd.min.js"></script>
 <script>
 // tabs
 document.querySelectorAll('.tab-btn').forEach(btn=>{
@@ -450,6 +640,7 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(btn.dataset.tab).classList.add('active');
+    setTimeout(()=>window.dispatchEvent(new Event('resize')), 60);
   });
 });
 
@@ -616,6 +807,149 @@ Promise.all([
 }).catch(err=>{
   console.error(err);
   document.getElementById('map-votos').innerHTML = '<p style="color:#E2A03A;font-size:12px;">Error cargando datos: '+err.message+'</p>';
+});
+
+// ---------- Section 2: X and Trends charts ----------
+const CH = {
+  blue:'#2a78d6', red:'#e34948', violet:'#4a3aa7', gray:'#888780', grayLight:'#c3c2b7',
+  green:'#1baf7a', amber:'#eda100', purple:'#5723F5', redDark:'#993C1D'
+};
+Chart.defaults.color = '#B7BAD1';
+Chart.defaults.font.size = 11;
+Chart.defaults.borderColor = '#2c2f52';
+
+function noLegendOpts(extra){
+  return Object.assign({
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ x:{grid:{color:'#22254a'}}, y:{grid:{color:'#22254a'}, beginAtZero:true} }
+  }, extra||{});
+}
+
+Promise.all([
+  fetch('data/x_monthly.json').then(r=>r.json()),
+  fetch('data/x_verified.json').then(r=>r.json()),
+  fetch('data/x_tone.json').then(r=>r.json()),
+  fetch('data/x_words.json').then(r=>r.json()),
+  fetch('data/x_engagement_avg.json').then(r=>r.json()),
+  fetch('data/x_engagement_share.json').then(r=>r.json()),
+  fetch('data/x_engagement_tiers.json').then(r=>r.json()),
+  fetch('data/x_replies.json').then(r=>r.json()),
+  fetch('data/trends_yearly.json').then(r=>r.json()),
+  fetch('data/trends_regions.json').then(r=>r.json())
+]).then(([xm, xv, xt, xw, xea, xes, xet, xr, ty, tr])=>{
+
+  new Chart(document.getElementById('ch-x-monthly'), {
+    type:'line',
+    data:{ labels:xm.months, datasets:[
+      {label:'Colombia', data:xm.colombia, borderColor:CH.blue, backgroundColor:CH.blue+'22', fill:true, tension:0.25, pointRadius:3},
+      {label:'Perú', data:xm.peru, borderColor:CH.red, backgroundColor:CH.red+'22', fill:true, tension:0.25, pointRadius:3}
+    ]},
+    options: noLegendOpts({scales:{x:{ticks:{autoSkip:false,maxRotation:45}, grid:{display:false}}, y:{beginAtZero:true, grid:{color:'#22254a'}}}})
+  });
+
+  new Chart(document.getElementById('ch-x-verified'), {
+    type:'bar',
+    data:{ labels:['Colombia','Perú'], datasets:[
+      {label:'Verificada', data:[xv.colombia.verificada, xv.peru.verificada], backgroundColor:CH.blue, borderRadius:4},
+      {label:'No verificada', data:[xv.colombia.no_verificada, xv.peru.no_verificada], backgroundColor:CH.grayLight, borderRadius:4}
+    ]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{stacked:true, grid:{color:'#22254a'}}, y:{stacked:true, grid:{display:false}}}})
+  });
+
+  new Chart(document.getElementById('ch-x-tone'), {
+    type:'bar',
+    data:{ labels:['Colombia','Perú'], datasets:[
+      {label:'Crítico', data:[xt.colombia.critico, xt.peru.critico], backgroundColor:CH.red, borderRadius:4},
+      {label:'Favorable', data:[xt.colombia.favorable, xt.peru.favorable], backgroundColor:CH.green, borderRadius:4},
+      {label:'Neutro', data:[xt.colombia.neutro, xt.peru.neutro], backgroundColor:CH.grayLight, borderRadius:4}
+    ]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{stacked:true, grid:{color:'#22254a'}}, y:{stacked:true, grid:{display:false}}}})
+  });
+
+  new Chart(document.getElementById('ch-words-co'), {
+    type:'bar',
+    data:{ labels:xw.colombia.labels.slice().reverse(), datasets:[{data:xw.colombia.values.slice().reverse(), backgroundColor:CH.blue, borderRadius:4}]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{grid:{color:'#22254a'}}, y:{grid:{display:false}}}})
+  });
+
+  new Chart(document.getElementById('ch-words-pe'), {
+    type:'bar',
+    data:{ labels:xw.peru.labels.slice().reverse(), datasets:[{data:xw.peru.values.slice().reverse(), backgroundColor:CH.red, borderRadius:4}]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{grid:{color:'#22254a'}}, y:{grid:{display:false}}}})
+  });
+
+  new Chart(document.getElementById('ch-eng-avg'), {
+    type:'bar',
+    data:{ labels:['Colombia','Perú'], datasets:[
+      {label:'Verificada', data:[xea.colombia.verificada, xea.peru.verificada], backgroundColor:CH.blue, borderRadius:4},
+      {label:'No verificada', data:[xea.colombia.no_verificada, xea.peru.no_verificada], backgroundColor:CH.grayLight, borderRadius:4}
+    ]},
+    options: noLegendOpts()
+  });
+
+  new Chart(document.getElementById('ch-eng-share'), {
+    type:'bar',
+    data:{ labels:['Colombia','Perú'], datasets:[
+      {label:'Verificada', data:[xes.colombia.verificada, xes.peru.verificada], backgroundColor:CH.blue, borderRadius:4},
+      {label:'No verificada', data:[xes.colombia.no_verificada, xes.peru.no_verificada], backgroundColor:CH.grayLight, borderRadius:4}
+    ]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{stacked:true, max:100, grid:{color:'#22254a'}}, y:{stacked:true, grid:{display:false}}}})
+  });
+
+  new Chart(document.getElementById('ch-eng-tiers'), {
+    type:'bar',
+    data:{ labels:['Bajo','Medio','Alto'], datasets:[
+      {label:'Colombia', data:[xet.colombia.bajo, xet.colombia.medio, xet.colombia.alto], backgroundColor:CH.blue, borderRadius:4},
+      {label:'Perú', data:[xet.peru.bajo, xet.peru.medio, xet.peru.alto], backgroundColor:CH.red, borderRadius:4}
+    ]},
+    options: noLegendOpts()
+  });
+
+  new Chart(document.getElementById('ch-replies'), {
+    type:'bar',
+    data:{ labels:[`Colombia (${xr.colombia.total} resp.)`, `Perú (${xr.peru.total} resp.)`], datasets:[
+      {label:'Neutro', data:[xr.colombia.neutro, xr.peru.neutro], backgroundColor:CH.grayLight, borderRadius:4},
+      {label:'Incita', data:[xr.colombia.incita, xr.peru.incita], backgroundColor:CH.green, borderRadius:4},
+      {label:'Rechaza', data:[xr.colombia.rechaza, xr.peru.rechaza], backgroundColor:CH.red, borderRadius:4}
+    ]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{stacked:true, grid:{color:'#22254a'}}, y:{stacked:true, grid:{display:false}}}})
+  });
+
+  new Chart(document.getElementById('ch-trends-co'), {
+    type:'line',
+    data:{ labels:ty.years, datasets:[
+      {label:'desobediencia civil', data:ty.colombia.dc, borderColor:CH.blue, backgroundColor:'transparent', borderWidth:2, pointRadius:1.5, tension:0.2},
+      {label:'qué es desobediencia civil', data:ty.colombia.qe, borderColor:CH.violet, backgroundColor:'transparent', borderWidth:2, borderDash:[5,3], pointRadius:1.5, tension:0.2},
+      {label:'combinado', data:ty.colombia.combinado, borderColor:CH.gray, backgroundColor:CH.gray+'15', borderWidth:1.5, borderDash:[2,2], pointRadius:0, tension:0.2, fill:true}
+    ]},
+    options: noLegendOpts({scales:{x:{ticks:{autoSkip:false,maxRotation:60}, grid:{display:false}}, y:{beginAtZero:true, grid:{color:'#22254a'}}}})
+  });
+
+  new Chart(document.getElementById('ch-trends-pe'), {
+    type:'line',
+    data:{ labels:ty.years, datasets:[
+      {label:'desobediencia civil', data:ty.peru.dc, borderColor:CH.red, backgroundColor:'transparent', borderWidth:2, pointRadius:1.5, tension:0.2},
+      {label:'qué es desobediencia civil', data:ty.peru.qe, borderColor:CH.redDark, backgroundColor:'transparent', borderWidth:2, borderDash:[5,3], pointRadius:1.5, tension:0.2},
+      {label:'combinado', data:ty.peru.combinado, borderColor:CH.gray, backgroundColor:CH.gray+'15', borderWidth:1.5, borderDash:[2,2], pointRadius:0, tension:0.2, fill:true}
+    ]},
+    options: noLegendOpts({scales:{x:{ticks:{autoSkip:false,maxRotation:60}, grid:{display:false}}, y:{beginAtZero:true, grid:{color:'#22254a'}}}})
+  });
+
+  new Chart(document.getElementById('ch-trends-reg-co'), {
+    type:'bar',
+    data:{ labels:tr.colombia.labels.slice().reverse(), datasets:[{data:tr.colombia.values.slice().reverse(), backgroundColor:CH.blue, borderRadius:4}]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{grid:{color:'#22254a'}}, y:{grid:{display:false}}}})
+  });
+
+  new Chart(document.getElementById('ch-trends-reg-pe'), {
+    type:'bar',
+    data:{ labels:tr.peru.labels.slice().reverse(), datasets:[{data:tr.peru.values.slice().reverse(), backgroundColor:CH.red, borderRadius:4}]},
+    options: noLegendOpts({indexAxis:'y', scales:{x:{grid:{color:'#22254a'}}, y:{grid:{display:false}}}})
+  });
+
+}).catch(err=>{
+  console.error(err);
 });
 </script>
 
