@@ -329,6 +329,7 @@
     margin-bottom:30px;
   }
   @media (max-width:1000px){ .chart-grid{grid-template-columns:1fr;} }
+  @media (max-width:1000px){ .chart-grid[style*="2fr"]{grid-template-columns:1fr !important;} }
   .chart-card{
     background:var(--bg-2);
     border:1px solid var(--border);
@@ -621,7 +622,36 @@
   <section class="panel" id="t3">
     <div class="panel-head">
       <h2>Riesgo territorial</h2>
-      <p>Próximamente: clasificación de riesgo alto, medio y bajo por municipio.</p>
+      <p>Clasificación de riesgo por municipio, combinando el resultado electoral, el nivel de polarización y la conflictividad social departamental de 2025.</p>
+    </div>
+
+    <div class="chart-grid" style="grid-template-columns:2fr 1fr;">
+      <div class="chart-card">
+        <h4>Mapa de riesgo territorial</h4>
+        <p class="desc">Cada municipio clasificado en riesgo alto, medio o bajo.</p>
+        <div class="mapwrap" id="map-riesgo" style="min-height:560px;"></div>
+        <div class="legend">
+          <span><span class="swatch" style="background:#2c2f52"></span>Bajo</span>
+          <span><span class="swatch" style="background:#E2A03A"></span>Medio</span>
+          <span><span class="swatch" style="background:#E34948"></span>Alto</span>
+        </div>
+        <div class="stat-row" id="stats-riesgo"></div>
+        <footer class="source">Fuente: Dapper, análisis propio a partir de Registraduría Nacional y Defensoría del Pueblo.</footer>
+      </div>
+
+      <div class="chart-card">
+        <h4>Metodología de la clasificación</h4>
+        <p class="desc">Puntaje aditivo por municipio, sobre un máximo de 6 puntos.</p>
+        <div class="method-note">
+          <b>Ganador:</b> Cepeda = +2 puntos. Abelardo = +0 puntos.<br><br>
+          <b>Polarización</b> (terciles nacionales del share top-2 en primera vuelta 2026): baja = +0, media = +1, alta = +2. Cortes: ≤84,4% baja, 84,4-89,6% media, &gt;89,6% alta.<br><br>
+          <b>Conflictividad 2025</b> (terciles departamentales, mismo valor para todos los municipios del departamento): bajo = +0, medio = +1, alto = +2. Cortes: ≤63 eventos bajo, 63-142 medio, &gt;142 alto.<br><br>
+          <b>Clasificación final:</b> 0-1 puntos = riesgo bajo. 2-4 puntos = riesgo medio. 5-6 puntos = riesgo alto.
+        </div>
+        <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
+          Esta es una hipótesis de trabajo para priorizar el monitoreo territorial, no una predicción. Los puntos de corte y el peso de cada variable deben calibrarse con Jairo García y Enrique antes de usarse operativamente.
+        </div>
+      </div>
     </div>
   </section>
 
@@ -657,8 +687,9 @@ Promise.all([
   fetch('data/co_topo.json').then(r=>r.json()),
   fetch('data/votes.json').then(r=>r.json()),
   fetch('data/polarizacion.json').then(r=>r.json()),
-  fetch('data/conflictividad.json').then(r=>r.json())
-]).then(([topo, votes, polarizacion, conflictividad])=>{
+  fetch('data/conflictividad.json').then(r=>r.json()),
+  fetch('data/riesgo.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion, conflictividad, riesgo])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
   const depts = topojson.feature(topo, topo.objects.depts);
@@ -792,13 +823,66 @@ Promise.all([
       .on('mouseleave', hideTip);
   }
 
+  function drawMapRiesgo(){
+    const el = document.getElementById('map-riesgo');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], mpios);
+    const path = d3.geoPath(projection);
+
+    const colorMap = {bajo:'#2c2f52', medio:'#E2A03A', alto:'#E34948'};
+
+    svg.selectAll('path')
+      .data(mpios.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = riesgo[d.id];
+        if(!v || !v.riesgo) return '#1c1e3a';
+        return colorMap[v.riesgo];
+      })
+      .attr('opacity', d=>{
+        const v = riesgo[d.id];
+        if(!v || !v.riesgo) return 1;
+        return v.riesgo === 'alto' ? 1 : 0.75;
+      })
+      .on('mousemove', (event,d)=>{
+        const v = riesgo[d.id];
+        if(!v || !v.riesgo){ hideTip(); return; }
+        const winnerLabel = v.winner==='cepeda' ? 'Cepeda' : 'Abelardo';
+        const html = `<div class="t-title">${v.mpio}</div>
+          <div style="color:var(--text-dim); margin-bottom:6px;">${v.dpto}</div>
+          <div class="t-row"><span>Riesgo</span><span style="text-transform:capitalize">${v.riesgo}</span></div>
+          <div class="t-row"><span>Ganador</span><span>${winnerLabel}</span></div>
+          <div class="t-row"><span>Polarización</span><span>${v.polarizacion_nivel} (${v.p26}%)</span></div>
+          <div class="t-row"><span>Conflictividad</span><span>${v.conflicto_nivel} (${v.conflicto_eventos} ev.)</span></div>
+          <div class="t-row"><span>Puntaje</span><span>${v.score}/6</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(riesgo).filter(v=>v.riesgo);
+    const total = vals.length;
+    const nAlto = vals.filter(v=>v.riesgo==='alto').length;
+    const nMedio = vals.filter(v=>v.riesgo==='medio').length;
+    const nBajo = vals.filter(v=>v.riesgo==='bajo').length;
+    document.getElementById('stats-riesgo').innerHTML = `
+      <div class="stat" style="border-color:#E34948;"><b>${nAlto}</b>Alto (${(nAlto/total*100).toFixed(0)}%)</div>
+      <div class="stat" style="border-color:#E2A03A;"><b>${nMedio}</b>Medio (${(nMedio/total*100).toFixed(0)}%)</div>
+      <div class="stat"><b>${nBajo}</b>Bajo (${(nBajo/total*100).toFixed(0)}%)</div>
+    `;
+  }
+
   function drawAll(){
     document.getElementById('map-votos').innerHTML='';
     document.getElementById('map-polarizacion').innerHTML='';
     document.getElementById('map-conflictividad').innerHTML='';
+    document.getElementById('map-riesgo').innerHTML='';
     drawMapVotos();
     drawMapPolarizacion();
     drawMapConflictividad();
+    drawMapRiesgo();
   }
 
   drawAll();
