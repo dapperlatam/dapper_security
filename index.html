@@ -290,8 +290,15 @@
 
       <div class="card">
         <h3>Polarización electoral</h3>
-        <p class="desc">Próximamente.</p>
-        <div class="placeholder">Mapa 2 en construcción</div>
+        <p class="desc">Concentración del voto en los dos candidatos más votados en primera vuelta (2018, 2022, 2026). Valores más altos indican una contienda más bipolar en ese municipio.</p>
+        <div class="mapwrap" id="map-polarizacion"></div>
+        <div class="legend">
+          <span>Menor</span>
+          <span class="legend-grad" id="legend-pol" style="background:linear-gradient(90deg,#2c2f52,#E2A03A,#E34948)"></span>
+          <span>Mayor</span>
+        </div>
+        <div class="stat-row" id="stats-polarizacion"></div>
+        <footer class="source">Fuente: Dapper con datos de la Registraduría Nacional del Estado Civil.</footer>
       </div>
 
       <div class="card">
@@ -345,8 +352,9 @@ function hideTip(){ tooltip.style.opacity = 0; }
 
 Promise.all([
   fetch('data/co_topo.json').then(r=>r.json()),
-  fetch('data/votes.json').then(r=>r.json())
-]).then(([topo, votes])=>{
+  fetch('data/votes.json').then(r=>r.json()),
+  fetch('data/polarizacion.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
 
@@ -399,11 +407,61 @@ Promise.all([
     `;
   }
 
-  drawMapVotos();
-  window.addEventListener('resize', ()=>{
+  function drawMapPolarizacion(){
+    const el = document.getElementById('map-polarizacion');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], mpios);
+    const path = d3.geoPath(projection);
+
+    const colorScale = d3.scaleLinear()
+      .domain([78, 87, 95])
+      .range(['#2c2f52', '#E2A03A', '#E34948'])
+      .clamp(true);
+
+    svg.selectAll('path')
+      .data(mpios.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = polarizacion[d.id];
+        if(!v || v.p26==null) return '#2c2f52';
+        return colorScale(v.p26);
+      })
+      .on('mousemove', (event,d)=>{
+        const v = polarizacion[d.id];
+        if(!v){ hideTip(); return; }
+        const trend = (v.p26 - v.p18).toFixed(1);
+        const arrow = trend > 0 ? '↑' : (trend < 0 ? '↓' : '→');
+        const html = `<div class="t-title">${v.mpio}</div>
+          <div style="color:var(--text-dim); margin-bottom:6px;">${v.dpto}</div>
+          <div class="t-row"><span>2018</span><span>${v.p18!=null?v.p18+'%':'s/d'}</span></div>
+          <div class="t-row"><span>2022</span><span>${v.p22!=null?v.p22+'%':'s/d'}</span></div>
+          <div class="t-row"><span>2026</span><span>${v.p26}%</span></div>
+          <div class="t-row"><span>Cambio 18→26</span><span>${arrow} ${Math.abs(trend)} pts</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(polarizacion).map(v=>v.p26).filter(v=>v!=null);
+    const avg = (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+    const alta = vals.filter(v=>v>=90).length;
+    document.getElementById('stats-polarizacion').innerHTML = `
+      <div class="stat"><b>${avg}%</b>Promedio nacional</div>
+      <div class="stat"><b>${alta}</b>Municipios con polarización ≥90%</div>
+    `;
+  }
+
+  function drawAll(){
     document.getElementById('map-votos').innerHTML='';
+    document.getElementById('map-polarizacion').innerHTML='';
     drawMapVotos();
-  });
+    drawMapPolarizacion();
+  }
+
+  drawAll();
+  window.addEventListener('resize', drawAll);
 
 }).catch(err=>{
   console.error(err);
