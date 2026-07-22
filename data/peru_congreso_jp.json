@@ -1,0 +1,202 @@
+{
+  "AMAZONAS": {
+    "curules_totales": 2,
+    "curules_jp": 0,
+    "pct_jp": 0.0,
+    "categoria": "sin_jp",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 2
+  },
+  "ANCASH": {
+    "curules_totales": 5,
+    "curules_jp": 1,
+    "pct_jp": 20.0,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 2
+  },
+  "APURIMAC": {
+    "curules_totales": 2,
+    "curules_jp": 2,
+    "pct_jp": 100.0,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 2
+  },
+  "AREQUIPA": {
+    "curules_totales": 6,
+    "curules_jp": 1,
+    "pct_jp": 16.7,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Partido del Buen Gobierno",
+    "escanos_partido_mas_escanos": 2
+  },
+  "AYACUCHO": {
+    "curules_totales": 3,
+    "curules_jp": 2,
+    "pct_jp": 66.7,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 2
+  },
+  "CAJAMARCA": {
+    "curules_totales": 6,
+    "curules_jp": 5,
+    "pct_jp": 83.3,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 5
+  },
+  "CALLAO": {
+    "curules_totales": 4,
+    "curules_jp": 0,
+    "pct_jp": 0.0,
+    "categoria": "sin_jp",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 2
+  },
+  "CUSCO": {
+    "curules_totales": 5,
+    "curules_jp": 2,
+    "pct_jp": 40.0,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 2
+  },
+  "HUANCAVELICA": {
+    "curules_totales": 2,
+    "curules_jp": 2,
+    "pct_jp": 100.0,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 2
+  },
+  "HUANUCO": {
+    "curules_totales": 3,
+    "curules_jp": 2,
+    "pct_jp": 66.7,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 2
+  },
+  "ICA": {
+    "curules_totales": 4,
+    "curules_jp": 0,
+    "pct_jp": 0.0,
+    "categoria": "sin_jp",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 1
+  },
+  "JUNIN": {
+    "curules_totales": 5,
+    "curules_jp": 1,
+    "pct_jp": 20.0,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 1
+  },
+  "LA LIBERTAD": {
+    "curules_totales": 7,
+    "curules_jp": 1,
+    "pct_jp": 14.3,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 3
+  },
+  "LAMBAYEQUE": {
+    "curules_totales": 5,
+    "curules_jp": 1,
+    "pct_jp": 20.0,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 3
+  },
+  "LIMA": {
+    "curules_totales": 36,
+    "curules_jp": 1,
+    "pct_jp": 2.8,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Renovación Popular",
+    "escanos_partido_mas_escanos": 9
+  },
+  "LORETO": {
+    "curules_totales": 4,
+    "curules_jp": 1,
+    "pct_jp": 25.0,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 3
+  },
+  "MADRE DE DIOS": {
+    "curules_totales": 2,
+    "curules_jp": 2,
+    "pct_jp": 100.0,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 2
+  },
+  "MOQUEGUA": {
+    "curules_totales": 2,
+    "curules_jp": 1,
+    "pct_jp": 50.0,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 1
+  },
+  "PASCO": {
+    "curules_totales": 2,
+    "curules_jp": 0,
+    "pct_jp": 0.0,
+    "categoria": "sin_jp",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 2
+  },
+  "PIURA": {
+    "curules_totales": 7,
+    "curules_jp": 0,
+    "pct_jp": 0.0,
+    "categoria": "sin_jp",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 4
+  },
+  "PUNO": {
+    "curules_totales": 5,
+    "curules_jp": 3,
+    "pct_jp": 60.0,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 3
+  },
+  "SAN MARTIN": {
+    "curules_totales": 4,
+    "curules_jp": 2,
+    "pct_jp": 50.0,
+    "categoria": "primera_fuerza",
+    "partido_mas_escanos": "Juntos por el Perú",
+    "escanos_partido_mas_escanos": 2
+  },
+  "TACNA": {
+    "curules_totales": 2,
+    "curules_jp": 1,
+    "pct_jp": 50.0,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Partido Cívico OBRAS",
+    "escanos_partido_mas_escanos": 1
+  },
+  "TUMBES": {
+    "curules_totales": 2,
+    "curules_jp": 0,
+    "pct_jp": 0.0,
+    "categoria": "sin_jp",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 2
+  },
+  "UCAYALI": {
+    "curules_totales": 3,
+    "curules_jp": 1,
+    "pct_jp": 33.3,
+    "categoria": "representacion",
+    "partido_mas_escanos": "Fuerza Popular",
+    "escanos_partido_mas_escanos": 2
+  }
+}
