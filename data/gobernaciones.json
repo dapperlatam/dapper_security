@@ -1,0 +1,6 @@
+{
+  "NARIÑO": {"categoria": "directo", "gobernador": "Luis Alfonso Escobar", "partido": "Pacto Histórico", "votos": 357845, "porcentaje": 51.67},
+  "AMAZONAS": {"categoria": "alianza", "gobernador": "Oscar Enrique Sánchez", "partido": "Coalición (Pacto Histórico, Liberal, ASI)", "votos": 14256, "porcentaje": 45.30},
+  "MAGDALENA": {"categoria": "alianza", "gobernador": "Rafael Alejandro Martínez", "partido": "Fuerza Ciudadana", "votos": 306057, "porcentaje": 50.75},
+  "CASANARE": {"categoria": "alianza", "gobernador": "Cesar Augusto Ortiz", "partido": "Coalición (Verde, Cambio Radical, Nuevo Liberalismo, En Marcha, ASI)", "votos": 127127, "porcentaje": 56.39}
+}

@@ -1,0 +1,314 @@
+{
+  "27077": {
+    "municipio": "Bajo Baudo",
+    "dpto": "CHOCO",
+    "categoria": "alianza",
+    "partido_local": "Pacto Historico Colombia Puede"
+  },
+  "19824": {
+    "municipio": "Totoro",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "Pacto Historico"
+  },
+  "19130": {
+    "municipio": "Cajibio",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "Pacto Historico Colombia Puede"
+  },
+  "15238": {
+    "municipio": "Duitama",
+    "dpto": "BOYACA",
+    "categoria": "alianza",
+    "partido_local": "Pacto Historico"
+  },
+  "99773": {
+    "municipio": "Cumaribo",
+    "dpto": "VICHADA",
+    "categoria": "alianza",
+    "partido_local": "Pacto Historico Colombia Puede"
+  },
+  "23672": {
+    "municipio": "San Antero",
+    "dpto": "CORDOBA",
+    "categoria": "alianza",
+    "partido_local": "Colombia Humana"
+  },
+  "15224": {
+    "municipio": "Cucaita",
+    "dpto": "BOYACA",
+    "categoria": "alianza",
+    "partido_local": "Colombia Humana"
+  },
+  "50251": {
+    "municipio": "El Castillo",
+    "dpto": "META",
+    "categoria": "alianza",
+    "partido_local": "Colombia Humana"
+  },
+  "76130": {
+    "municipio": "Candelaria",
+    "dpto": "VALLE DEL CAUCA",
+    "categoria": "alianza",
+    "partido_local": "Colombia Humana"
+  },
+  "54800": {
+    "municipio": "Teorama",
+    "dpto": "NORTE DE SANTANDER",
+    "categoria": "alianza",
+    "partido_local": "Colombia Humana"
+  },
+  "81300": {
+    "municipio": "Fortul",
+    "dpto": "ARAUCA",
+    "categoria": "alianza",
+    "partido_local": "Polo Democratico Alternativo"
+  },
+  "05475": {
+    "municipio": "Murindo",
+    "dpto": "ANTIOQUIA",
+    "categoria": "alianza",
+    "partido_local": "Polo Democratico Alternativo"
+  },
+  "81065": {
+    "municipio": "Arauquita",
+    "dpto": "ARAUCA",
+    "categoria": "alianza",
+    "partido_local": "Polo Democratico Alternativo"
+  },
+  "52323": {
+    "municipio": "Gualmatan",
+    "dpto": "NARIÑO",
+    "categoria": "alianza",
+    "partido_local": "Union Patriotica"
+  },
+  "19364": {
+    "municipio": "Jambalo",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "23464": {
+    "municipio": "Momil",
+    "dpto": "CORDOBA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "86571": {
+    "municipio": "Puerto Guzman",
+    "dpto": "PUTUMAYO",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "66572": {
+    "municipio": "Pueblo Rico",
+    "dpto": "RISARALDA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "86320": {
+    "municipio": "Orito",
+    "dpto": "PUTUMAYO",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "19821": {
+    "municipio": "Toribio",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "13030": {
+    "municipio": "Altos Del Rosario",
+    "dpto": "BOLIVAR",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "52435": {
+    "municipio": "Mallama",
+    "dpto": "NARIÑO",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "08296": {
+    "municipio": "Galapa",
+    "dpto": "ATLANTICO",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "52083": {
+    "municipio": "Belen",
+    "dpto": "NARIÑO",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "08421": {
+    "municipio": "Luruaco",
+    "dpto": "ATLANTICO",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "17614": {
+    "municipio": "Riosucio",
+    "dpto": "CALDAS",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "19532": {
+    "municipio": "Patia",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "19355": {
+    "municipio": "Inza",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "44035": {
+    "municipio": "Albania",
+    "dpto": "LA GUAJIRA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "19473": {
+    "municipio": "Morales",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "MAIS"
+  },
+  "73504": {
+    "municipio": "Ortega",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "ADA"
+  },
+  "73347": {
+    "municipio": "Herveo",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "ADA"
+  },
+  "19110": {
+    "municipio": "Buenos Aires",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "ADA"
+  },
+  "52250": {
+    "municipio": "El Charco",
+    "dpto": "NARIÑO",
+    "categoria": "alianza",
+    "partido_local": "ADA"
+  },
+  "76895": {
+    "municipio": "Zarzal",
+    "dpto": "VALLE DEL CAUCA",
+    "categoria": "alianza",
+    "partido_local": "ADA"
+  },
+  "19455": {
+    "municipio": "Miranda",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "ADA"
+  },
+  "76275": {
+    "municipio": "Florida",
+    "dpto": "VALLE DEL CAUCA",
+    "categoria": "alianza",
+    "partido_local": "ADA"
+  },
+  "52418": {
+    "municipio": "Los Andes",
+    "dpto": "NARIÑO",
+    "categoria": "alianza",
+    "partido_local": "Todos Somos Colombia"
+  },
+  "19513": {
+    "municipio": "Padilla",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "Todos Somos Colombia"
+  },
+  "47001": {
+    "municipio": "Santa Marta",
+    "dpto": "MAGDALENA",
+    "categoria": "alianza",
+    "partido_local": "Fuerza Ciudadana"
+  },
+  "73671": {
+    "municipio": "Saldaña",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "73024": {
+    "municipio": "Alpujarra",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "15740": {
+    "municipio": "Siachoque",
+    "dpto": "BOYACA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "73483": {
+    "municipio": "Natagaima",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "73043": {
+    "municipio": "Anzoategui",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "20570": {
+    "municipio": "Pueblo Bello",
+    "dpto": "CESAR",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "73026": {
+    "municipio": "Alvarado",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "19548": {
+    "municipio": "Piendamo",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "73217": {
+    "municipio": "Coyaima",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "73349": {
+    "municipio": "Honda",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "73200": {
+    "municipio": "Coello",
+    "dpto": "TOLIMA",
+    "categoria": "alianza",
+    "partido_local": "PCC (Partido Comunista)"
+  },
+  "19809": {
+    "municipio": "Timbiqui",
+    "dpto": "CAUCA",
+    "categoria": "alianza",
+    "partido_local": "Todos Somos Colombia"
+  }
+}
