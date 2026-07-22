@@ -438,6 +438,13 @@
       <h2>Contexto post-elecciones</h2>
       <p>Resultados de la segunda vuelta presidencial 2026 a nivel municipio, nivel de polarización electoral y conflictividad social registrada en 2025, como línea base antes de las posesiones del 28 de julio (Perú) y el 7 de agosto (Colombia).</p>
     </div>
+
+    <div class="filter-row">
+      <button class="filter-btn country-btn active" data-country="colombia">Colombia</button>
+      <button class="filter-btn country-btn" data-country="peru">Perú</button>
+    </div>
+
+    <div id="pais-colombia">
     <div class="map-grid">
 
       <div class="card">
@@ -583,6 +590,67 @@
       <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
         En 2023 el Pacto Histórico se presentó de forma fragmentada: varios de sus partidos constitutivos compitieron con marca propia en distintos municipios, sin usar la etiqueta "Pacto Histórico". Por eso, a nivel de alcaldías no distinguimos una categoría de "victoria directa" — todo lo identificado aquí se trata como coalición/alianza, incluyendo los municipios donde la lista ganadora usó explícitamente el nombre "Pacto Histórico". Esto es intencional para no sobreestimar la fuerza territorial real del movimiento a nivel municipal.
       </div>
+    </div>
+
+    </div>
+
+    <div id="pais-peru" style="display:none;">
+    <div class="map-grid">
+
+      <div class="card">
+        <h3>Votos por departamento: Fujimori vs. Sánchez</h3>
+        <p class="desc">Segunda vuelta presidencial 2026. Color por candidato ganador, intensidad según el margen de victoria.</p>
+        <div class="mapwrap" id="map-votos-pe"></div>
+        <div class="legend">
+          <span><span class="swatch" style="background:#E2A03A"></span>Fujimori</span>
+          <span class="legend-grad"></span>
+          <span><span class="swatch" style="background:#2A9BD6"></span>Sánchez</span>
+        </div>
+        <div class="stat-row" id="stats-votos-pe"></div>
+        <footer class="source">Fuente: Dapper con datos de la ONPE (Oficina Nacional de Procesos Electorales del Perú).</footer>
+      </div>
+
+      <div class="card">
+        <h3>Polarización electoral</h3>
+        <p class="desc">Concentración del voto en los dos candidatos más votados en primera vuelta (2016, 2021, 2026). Valores más altos indican una contienda más bipolar en ese departamento.</p>
+        <div class="mapwrap" id="map-polarizacion-pe"></div>
+        <div class="legend">
+          <span>Menor</span>
+          <span class="legend-grad" style="background:linear-gradient(90deg,#2c2f52,#E2A03A,#E34948)"></span>
+          <span>Mayor</span>
+        </div>
+        <div class="stat-row" id="stats-polarizacion-pe"></div>
+        <div class="method-note">
+          Los dos candidatos más votados no son necesariamente los mismos en cada departamento o cada elección — se calculan de forma independiente por corte. Se excluye la categoría "Otros" del cálculo por ser una bolsa de candidatos menores, no un competidor identificable. A diferencia de Colombia, la polarización peruana bajó de forma consistente entre 2016 y 2026 en la mayoría de departamentos: el campo político se fragmentó en vez de concentrarse.
+        </div>
+        <footer class="source">Fuente: Dapper con datos de la ONPE, primera vuelta 2016, 2021 y 2026.</footer>
+      </div>
+
+      <div class="card" id="card-conflictividad-pe">
+        <h3>Conflictividad social</h3>
+        <p class="desc">Conflictos sociales activos y latentes registrados por región a abril de 2026.</p>
+        <div class="conf-top">
+          <div class="mapwrap" id="map-conflictividad-pe"></div>
+          <div class="conf-stat-box">
+            <div class="conf-big">190</div>
+            <div class="conf-big-label">conflictos registrados<br>en el país</div>
+            <div class="conf-big2">159 / 31</div>
+            <div class="conf-big-label">activos / latentes</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span>Menos casos</span>
+          <span class="legend-grad" style="background:linear-gradient(90deg,#2c2f52,#5723F5,#E34948)"></span>
+          <span>Más casos</span>
+        </div>
+        <div class="stat-row" id="stats-conflictividad-pe"></div>
+        <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
+          Lima Metropolitana y Lima Provincias se suman en un solo valor de Lima para que coincida con la geografía electoral. Se excluyen 11 casos clasificados como "Multirregional" (9) o "Nacional" (2) por no tener una región única georreferenciable (190 registrados en total, 179 mapeados aquí).
+        </div>
+        <footer class="source">Fuente: Defensoría del Pueblo del Perú, Reporte de Conflictos Sociales N.° 266, abril 2026.</footer>
+      </div>
+
+    </div>
     </div>
 
   </section>
@@ -794,11 +862,16 @@ Promise.all([
   fetch('data/riesgo.json').then(r=>r.json()),
   fetch('data/pacto_camara.json').then(r=>r.json()),
   fetch('data/gobernaciones.json').then(r=>r.json()),
-  fetch('data/alcaldias_ph.json').then(r=>r.json())
-]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara, gobernaciones, alcaldiasPH])=>{
+  fetch('data/alcaldias_ph.json').then(r=>r.json()),
+  fetch('data/peru_depts.json').then(r=>r.json()),
+  fetch('data/peru_votes.json').then(r=>r.json()),
+  fetch('data/peru_polarizacion.json').then(r=>r.json()),
+  fetch('data/peru_conflictividad.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara, gobernaciones, alcaldiasPH, peruDepts, peruVotes, peruPolarizacion, peruConflictividad])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
   const depts = topojson.feature(topo, topo.objects.depts);
+  const peruFeatures = peruDepts; // already a plain GeoJSON FeatureCollection, no topojson conversion needed
 
   function drawMapVotos(){
     const el = document.getElementById('map-votos');
@@ -1136,7 +1209,136 @@ Promise.all([
     `;
   }
 
-  function drawAll(){
+  // ---------- Perú maps ----------
+  function drawMapVotosPeru(){
+    const el = document.getElementById('map-votos-pe');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], peruFeatures);
+    const path = d3.geoPath(projection);
+
+    const colorScale = d3.scaleLinear()
+      .domain([-60, 0, 60])
+      .range(['#2A9BD6', '#384066', '#E2A03A'])
+      .clamp(true);
+
+    svg.selectAll('path')
+      .data(peruFeatures.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = peruVotes[d.properties.NOMBDEP];
+        if(!v) return '#2c2f52';
+        return colorScale(v.margin);
+      })
+      .on('mousemove', (event,d)=>{
+        const v = peruVotes[d.properties.NOMBDEP];
+        if(!v){ hideTip(); return; }
+        const html = `<div class="t-title">${d.properties.NOMBDEP}</div>
+          <div class="t-row"><span>Fujimori</span><span>${v.fujimori_pct}%</span></div>
+          <div class="t-row"><span>Sánchez</span><span>${v.sanchez_pct}%</span></div>
+          <div class="t-row"><span>Participación</span><span>${v.participacion_pct}%</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(peruVotes).filter(v=>v.depto!=='Voto extranjero');
+    const wonFuji = vals.filter(v=>v.winner==='fujimori').length;
+    const wonSan = vals.filter(v=>v.winner==='sanchez').length;
+    const totF = vals.reduce((a,v)=>a+v.fujimori,0);
+    const totS = vals.reduce((a,v)=>a+v.sanchez,0);
+    document.getElementById('stats-votos-pe').innerHTML = `
+      <div class="stat"><b>${(totF/(totF+totS)*100).toFixed(1)}%</b>Fujimori (${wonFuji} departamentos)</div>
+      <div class="stat"><b>${(totS/(totF+totS)*100).toFixed(1)}%</b>Sánchez (${wonSan} departamentos)</div>
+    `;
+  }
+
+  function drawMapPolarizacionPeru(){
+    const el = document.getElementById('map-polarizacion-pe');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], peruFeatures);
+    const path = d3.geoPath(projection);
+
+    const colorScale = d3.scaleLinear()
+      .domain([40, 60, 85])
+      .range(['#2c2f52', '#E2A03A', '#E34948'])
+      .clamp(true);
+
+    svg.selectAll('path')
+      .data(peruFeatures.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = peruPolarizacion[d.properties.NOMBDEP];
+        if(!v || v.p26==null) return '#2c2f52';
+        return colorScale(v.p26);
+      })
+      .on('mousemove', (event,d)=>{
+        const v = peruPolarizacion[d.properties.NOMBDEP];
+        if(!v){ hideTip(); return; }
+        const trend = (v.p26 - v.p16).toFixed(1);
+        const arrow = trend > 0 ? '↑' : (trend < 0 ? '↓' : '→');
+        const html = `<div class="t-title">${d.properties.NOMBDEP}</div>
+          <div class="t-row"><span>2016</span><span>${v.p16!=null?v.p16+'%':'s/d'} (${v.top2_2016?v.top2_2016.join('+'):''})</span></div>
+          <div class="t-row"><span>2021</span><span>${v.p21!=null?v.p21+'%':'s/d'} (${v.top2_2021?v.top2_2021.join('+'):''})</span></div>
+          <div class="t-row"><span>2026</span><span>${v.p26}% (${v.top2_2026.join('+')})</span></div>
+          <div class="t-row"><span>Cambio 16→26</span><span>${arrow} ${Math.abs(trend)} pts</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(peruPolarizacion).map(v=>v.p26).filter(v=>v!=null);
+    const avg = (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+    const alta = vals.filter(v=>v>=70).length;
+    document.getElementById('stats-polarizacion-pe').innerHTML = `
+      <div class="stat"><b>${avg}%</b>Promedio nacional 2026</div>
+      <div class="stat"><b>${alta}</b>Departamentos con polarización ≥70%</div>
+    `;
+  }
+
+  function drawMapConflictividadPeru(){
+    const el = document.getElementById('map-conflictividad-pe');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], peruFeatures);
+    const path = d3.geoPath(projection);
+
+    const vals = Object.values(peruConflictividad).map(v=>v.total).filter(v=>v!=null);
+    const maxV = d3.max(vals);
+    const colorScale = d3.scaleLinear()
+      .domain([0, maxV*0.35, maxV])
+      .range(['#2c2f52', '#5723F5', '#E34948'])
+      .clamp(true);
+
+    svg.selectAll('path')
+      .data(peruFeatures.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = peruConflictividad[d.properties.NOMBDEP];
+        if(!v) return '#2c2f52';
+        return colorScale(v.total);
+      })
+      .on('mousemove', (event,d)=>{
+        const v = peruConflictividad[d.properties.NOMBDEP];
+        const html = `<div class="t-title">${d.properties.NOMBDEP}</div>
+          <div class="t-row"><span>Total</span><span>${v?v.total:'sin datos'}</span></div>
+          <div class="t-row"><span>Activos</span><span>${v?v.activo:'-'}</span></div>
+          <div class="t-row"><span>Latentes</span><span>${v?v.latente:'-'}</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    document.getElementById('stats-conflictividad-pe').innerHTML = `
+      <div class="stat"><b>${vals.reduce((a,b)=>a+b,0)}</b>Casos mapeados (25 regiones)</div>
+    `;
+  }
+
+  function drawAllColombia(){
     document.getElementById('map-votos').innerHTML='';
     document.getElementById('map-polarizacion').innerHTML='';
     document.getElementById('map-conflictividad').innerHTML='';
@@ -1153,8 +1355,34 @@ Promise.all([
     drawMapAlcaldias();
   }
 
-  drawAll();
-  window.addEventListener('resize', drawAll);
+  function drawAllPeru(){
+    document.getElementById('map-votos-pe').innerHTML='';
+    document.getElementById('map-polarizacion-pe').innerHTML='';
+    document.getElementById('map-conflictividad-pe').innerHTML='';
+    drawMapVotosPeru();
+    drawMapPolarizacionPeru();
+    drawMapConflictividadPeru();
+  }
+
+  let paisActivo = 'colombia';
+
+  document.querySelectorAll('.country-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.country-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      paisActivo = btn.dataset.country;
+      document.getElementById('pais-colombia').style.display = paisActivo==='colombia' ? '' : 'none';
+      document.getElementById('pais-peru').style.display = paisActivo==='peru' ? '' : 'none';
+      setTimeout(()=>{
+        if(paisActivo==='colombia') drawAllColombia(); else drawAllPeru();
+      }, 60);
+    });
+  });
+
+  drawAllColombia();
+  window.addEventListener('resize', ()=>{
+    if(paisActivo==='colombia') drawAllColombia(); else drawAllPeru();
+  });
 
 }).catch(err=>{
   console.error(err);
