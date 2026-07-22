@@ -482,6 +482,32 @@
       </div>
 
     </div>
+
+    <div class="section-sub">Representación legislativa y territorial del Pacto Histórico</div>
+    <div class="card" style="min-height:auto;">
+      <h3>Curules en Cámara de Representantes vs. resultado electoral (2026-2030)</h3>
+      <p class="desc">Complemento al resultado presidencial: dónde el Pacto Histórico tiene bancada propia en la Cámara por departamento, y si esa bancada coincide o no con haber ganado la votación legislativa en ese territorio. La bancada refleja estructura organizativa local; el resultado electoral refleja fuerza de voto bruta — no son lo mismo.</p>
+
+      <div class="method-note">
+        <b>Dominio electoral e institucional:</b> el Pacto Histórico ganó la votación a Cámara en el departamento y además concentra una porción alta de su bancada (Bogotá, Valle del Cauca, Cundinamarca, Nariño, Cauca). Fuerza electoral y peso legislativo coinciden.<br><br>
+        <b>Fuerza electoral subrepresentada:</b> el Pacto Histórico (o su coalición) ganó la votación, pero el sistema de reparto proporcional (D'Hondt) le dejó una porción baja de la bancada departamental (Caldas, Risaralda) — posible voto disperso entre varias listas menores que igual retuvieron curul.<br><br>
+        <b>Presencia institucional sin mayoría de voto:</b> el Pacto Histórico tiene una o más curules pero <b>no</b> ganó la votación departamental (Antioquia, Atlántico, Santander, Tolima, Bolívar, Boyacá, Cesar, Córdoba, Huila, Magdalena, Meta, Putumayo, Quindío). Es la categoría más relevante para el análisis de riesgo: hay estructura política organizada y con vocería en territorio donde el electorado mayoritario respalda otra fuerza — una capacidad de movilización que el resultado presidencial por sí solo no muestra.
+      </div>
+      <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
+        El Senado no se incluye en este mapa: su circunscripción es nacional (100 curules de lista única), por lo que no es georreferenciable por departamento. Tampoco se incluyen las curules especiales (Citrep, afrodescendientes, indígena, exterior).
+      </div>
+
+      <div class="mapwrap" id="map-camara-ph" style="min-height:480px;"></div>
+      <div class="legend">
+        <span><span class="swatch" style="background:#84CC16"></span>Dominio electoral e institucional</span>
+        <span><span class="swatch" style="background:#2A9BD6"></span>Fuerza electoral subrepresentada</span>
+        <span><span class="swatch" style="background:#7861DB"></span>Presencia institucional sin mayoría de voto</span>
+        <span><span class="swatch" style="background:#2c2f52"></span>Sin representación del Pacto Histórico</span>
+      </div>
+      <div class="stat-row" id="stats-camara-ph"></div>
+      <footer class="source">Fuente: Registraduría Nacional del Estado Civil — Boletín 79 de preconteo y escrutinio definitivo de la Cámara de Representantes 2026-2030 (Consejo Nacional Electoral).</footer>
+    </div>
+
   </section>
 
   <section class="panel" id="t2">
@@ -688,8 +714,9 @@ Promise.all([
   fetch('data/votes.json').then(r=>r.json()),
   fetch('data/polarizacion.json').then(r=>r.json()),
   fetch('data/conflictividad.json').then(r=>r.json()),
-  fetch('data/riesgo.json').then(r=>r.json())
-]).then(([topo, votes, polarizacion, conflictividad, riesgo])=>{
+  fetch('data/riesgo.json').then(r=>r.json()),
+  fetch('data/pacto_camara.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
   const depts = topojson.feature(topo, topo.objects.depts);
@@ -823,6 +850,62 @@ Promise.all([
       .on('mouseleave', hideTip);
   }
 
+  function drawMapCamaraPH(){
+    const el = document.getElementById('map-camara-ph');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], depts);
+    const path = d3.geoPath(projection);
+
+    const catColor = {
+      dominio: '#84CC16',
+      subrepresentada: '#2A9BD6',
+      institucional: '#7861DB',
+      sin_ph: '#2c2f52'
+    };
+
+    svg.selectAll('path')
+      .data(depts.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = pactoCamara[d.properties.dpt];
+        if(!v) return '#2c2f52';
+        return catColor[v.categoria] || '#2c2f52';
+      })
+      .on('mousemove', (event,d)=>{
+        const v = pactoCamara[d.properties.dpt];
+        const label = d.properties.dpt.replace('SANTAFE DE BOGOTA D.C','BOGOTÁ D.C.').replace('ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA','SAN ANDRÉS Y PROVIDENCIA');
+        if(!v){ hideTip(); return; }
+        const catLabel = {
+          dominio:'Dominio electoral e institucional',
+          subrepresentada:'Fuerza electoral subrepresentada',
+          institucional:'Presencia institucional sin mayoría de voto',
+          sin_ph:'Sin representación del Pacto Histórico'
+        }[v.categoria] || 's/d';
+        const html = `<div class="t-title">${label}</div>
+          <div class="t-row"><span>Categoría</span><span>${catLabel}</span></div>
+          <div class="t-row"><span>Curules PH / total</span><span>${v.curules_ph} / ${v.curules_totales} (${v.pct_ph}%)</span></div>
+          <div class="t-row"><span>Partido ganador</span><span>${v.partido_ganador}</span></div>
+          <div class="t-row"><span>Votos ganador</span><span>${v.votos_ganador.toLocaleString('es-CO')}</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(pactoCamara);
+    const totalCurulesPH = vals.reduce((a,v)=>a+v.curules_ph,0);
+    const nDominio = vals.filter(v=>v.categoria==='dominio').length;
+    const nSubrep = vals.filter(v=>v.categoria==='subrepresentada').length;
+    const nInstit = vals.filter(v=>v.categoria==='institucional').length;
+    document.getElementById('stats-camara-ph').innerHTML = `
+      <div class="stat"><b>${totalCurulesPH}</b>Curules totales del Pacto Histórico en Cámara</div>
+      <div class="stat" style="border-color:#84CC16;"><b>${nDominio}</b>Departamentos con dominio electoral e institucional</div>
+      <div class="stat" style="border-color:#2A9BD6;"><b>${nSubrep}</b>Departamentos con fuerza subrepresentada</div>
+      <div class="stat" style="border-color:#7861DB;"><b>${nInstit}</b>Departamentos con presencia institucional sin mayoría de voto</div>
+    `;
+  }
+
   function drawMapRiesgo(){
     const el = document.getElementById('map-riesgo');
     const width = el.clientWidth, height = el.clientHeight;
@@ -879,10 +962,12 @@ Promise.all([
     document.getElementById('map-polarizacion').innerHTML='';
     document.getElementById('map-conflictividad').innerHTML='';
     document.getElementById('map-riesgo').innerHTML='';
+    document.getElementById('map-camara-ph').innerHTML='';
     drawMapVotos();
     drawMapPolarizacion();
     drawMapConflictividad();
     drawMapRiesgo();
+    drawMapCamaraPH();
   }
 
   drawAll();
