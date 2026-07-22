@@ -383,6 +383,33 @@
     border-top:1px solid var(--border);
     padding-top:10px;
   }
+  .filter-row{
+    display:flex;
+    gap:8px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+  }
+  .filter-btn{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text-mid);
+    font-family:'Segoe UI', sans-serif;
+    font-size:11px;
+    font-weight:600;
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .filter-btn.active{
+    background:var(--purple);
+    color:#fff;
+    border-color:var(--purple-light);
+  }
+  .filter-btn:hover:not(.active){
+    color:var(--text-hi);
+    border-color:var(--gray);
+  }
 </style>
 </head>
 <body>
@@ -506,6 +533,56 @@
       </div>
       <div class="stat-row" id="stats-camara-ph"></div>
       <footer class="source">Fuente: Registraduría Nacional del Estado Civil — Boletín 79 de preconteo y escrutinio definitivo de la Cámara de Representantes 2026-2030 (Consejo Nacional Electoral).</footer>
+    </div>
+
+    <div class="section-sub">Gobernaciones y alcaldías del movimiento (elecciones regionales 2023, vigentes 2024-2027)</div>
+    <p class="desc" style="max-width:900px; margin:0 0 16px;">A diferencia del resultado presidencial de junio de 2026, estas autoridades llevan entre dos y tres años en ejercicio (elegidas en octubre de 2023, periodo 2024-2027) y reflejan la capacidad de gobierno territorial ya instalada del movimiento antes de la transición nacional. El filtro distingue entre victorias directas del Pacto Histórico y aquellas de movimientos aliados o coaliciones que lo incluyeron, ya que en 2023 el partido se presentó de forma fragmentada en varios departamentos.</p>
+
+    <div class="map-grid">
+
+      <div class="card">
+        <h3>Gobernaciones</h3>
+        <p class="desc">Gobernaciones ganadas directamente por el Pacto Histórico o por coaliciones/alianzas de las que hizo parte.</p>
+        <div class="filter-row">
+          <button class="filter-btn active" data-map="gob" data-cat="todas">Todas</button>
+          <button class="filter-btn" data-map="gob" data-cat="directo">Pacto Histórico</button>
+          <button class="filter-btn" data-map="gob" data-cat="alianza">Coalición/Alianza</button>
+        </div>
+        <div class="mapwrap" id="map-gobernaciones"></div>
+        <div class="legend">
+          <span><span class="swatch" style="background:#84CC16"></span>Pacto Histórico (directo)</span>
+          <span><span class="swatch" style="background:#E2A03A"></span>Coalición/Alianza</span>
+        </div>
+        <div class="stat-row" id="stats-gobernaciones"></div>
+        <footer class="source">Fuente: Registraduría Nacional del Estado Civil, elecciones regionales de octubre de 2023.</footer>
+      </div>
+
+      <div class="card">
+        <h3>Alcaldías</h3>
+        <p class="desc">Municipios donde el partido ganador es el Pacto Histórico o un movimiento de su coalición nacional, o uno que clasificamos como aliado.</p>
+        <div class="filter-row">
+          <button class="filter-btn active" data-map="alc" data-cat="todas">Todas</button>
+          <button class="filter-btn" data-map="alc" data-cat="directo">Pacto Histórico</button>
+          <button class="filter-btn" data-map="alc" data-cat="alianza">Coalición/Alianza</button>
+        </div>
+        <div class="mapwrap" id="map-alcaldias"></div>
+        <div class="legend">
+          <span><span class="swatch" style="background:#E2A03A"></span>Coalición/Alianza</span>
+        </div>
+        <div class="stat-row" id="stats-alcaldias"></div>
+        <footer class="source">Fuente: Registraduría Nacional del Estado Civil, elecciones regionales de octubre de 2023.</footer>
+      </div>
+
+    </div>
+
+    <div class="card" style="min-height:auto;">
+      <div class="method-note">
+        <b>Partidos que forman parte de la coalición nacional documentada del Pacto Histórico:</b> Colombia Humana, Unión Patriótica, Partido Comunista Colombiano, Polo Democrático Alternativo, Movimiento Alternativo Indígena y Social (MAIS), Todos Somos Colombia.<br><br>
+        <b>Clasificados como alianza según nuestro criterio (no forman parte de la coalición nacional documentada, pero se incluyen por su alineamiento político):</b> Alianza Democrática Amplia (ADA), Fuerza Ciudadana.
+      </div>
+      <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
+        En 2023 el Pacto Histórico se presentó de forma fragmentada: varios de sus partidos constitutivos compitieron con marca propia en distintos municipios, sin usar la etiqueta "Pacto Histórico". Por eso, a nivel de alcaldías no distinguimos una categoría de "victoria directa" — todo lo identificado aquí se trata como coalición/alianza, incluyendo los municipios donde la lista ganadora usó explícitamente el nombre "Pacto Histórico". Esto es intencional para no sobreestimar la fuerza territorial real del movimiento a nivel municipal.
+      </div>
     </div>
 
   </section>
@@ -715,8 +792,10 @@ Promise.all([
   fetch('data/polarizacion.json').then(r=>r.json()),
   fetch('data/conflictividad.json').then(r=>r.json()),
   fetch('data/riesgo.json').then(r=>r.json()),
-  fetch('data/pacto_camara.json').then(r=>r.json())
-]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara])=>{
+  fetch('data/pacto_camara.json').then(r=>r.json()),
+  fetch('data/gobernaciones.json').then(r=>r.json()),
+  fetch('data/alcaldias_ph.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara, gobernaciones, alcaldiasPH])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
   const depts = topojson.feature(topo, topo.objects.depts);
@@ -906,6 +985,106 @@ Promise.all([
     `;
   }
 
+  let filtroGob = 'todas';
+  let filtroAlc = 'todas';
+
+  function drawMapGobernaciones(){
+    const el = document.getElementById('map-gobernaciones');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], depts);
+    const path = d3.geoPath(projection);
+
+    const catColor = { directo:'#84CC16', alianza:'#E2A03A' };
+
+    svg.selectAll('path')
+      .data(depts.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = gobernaciones[d.properties.dpt];
+        if(!v) return '#1c1e3a';
+        if(filtroGob!=='todas' && v.categoria!==filtroGob) return '#1c1e3a';
+        return catColor[v.categoria] || '#1c1e3a';
+      })
+      .on('mousemove', (event,d)=>{
+        const v = gobernaciones[d.properties.dpt];
+        const label = d.properties.dpt.replace('SANTAFE DE BOGOTA D.C','BOGOTÁ D.C.').replace('ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA','SAN ANDRÉS Y PROVIDENCIA');
+        if(!v){ hideTip(); return; }
+        const catLabel = v.categoria==='directo' ? 'Pacto Histórico (directo)' : 'Coalición/Alianza';
+        const html = `<div class="t-title">${label}</div>
+          <div class="t-row"><span>Categoría</span><span>${catLabel}</span></div>
+          <div class="t-row"><span>Gobernador(a)</span><span>${v.gobernador}</span></div>
+          <div class="t-row"><span>Partido/coalición</span><span>${v.partido}</span></div>
+          <div class="t-row"><span>Votos</span><span>${v.votos.toLocaleString('es-CO')} (${v.porcentaje}%)</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(gobernaciones);
+    const nDirecto = vals.filter(v=>v.categoria==='directo').length;
+    const nAlianza = vals.filter(v=>v.categoria==='alianza').length;
+    document.getElementById('stats-gobernaciones').innerHTML = `
+      <div class="stat" style="border-color:#84CC16;"><b>${nDirecto}</b>Directas</div>
+      <div class="stat" style="border-color:#E2A03A;"><b>${nAlianza}</b>Coalición/alianza</div>
+    `;
+  }
+
+  function drawMapAlcaldias(){
+    const el = document.getElementById('map-alcaldias');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], mpios);
+    const path = d3.geoPath(projection);
+
+    svg.selectAll('path')
+      .data(mpios.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = alcaldiasPH[d.id];
+        if(!v) return '#1c1e3a';
+        if(filtroAlc!=='todas' && v.categoria!==filtroAlc) return '#1c1e3a';
+        return v.categoria==='directo' ? '#84CC16' : '#E2A03A';
+      })
+      .on('mousemove', (event,d)=>{
+        const v = alcaldiasPH[d.id];
+        if(!v){ hideTip(); return; }
+        const catLabel = v.categoria==='directo' ? 'Pacto Histórico (directo)' : 'Coalición/Alianza';
+        const html = `<div class="t-title">${v.municipio}</div>
+          <div style="color:var(--text-dim); margin-bottom:6px;">${v.dpto}</div>
+          <div class="t-row"><span>Categoría</span><span>${catLabel}</span></div>
+          <div class="t-row"><span>Partido local</span><span>${v.partido_local}</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(alcaldiasPH);
+    const nAlianza = vals.filter(v=>v.categoria==='alianza').length;
+    document.getElementById('stats-alcaldias').innerHTML = `
+      <div class="stat" style="border-color:#E2A03A;"><b>${nAlianza}</b>Municipios (coalición/alianza)</div>
+    `;
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const mapName = btn.dataset.map;
+      document.querySelectorAll(`.filter-btn[data-map="${mapName}"]`).forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      if(mapName==='gob'){
+        filtroGob = btn.dataset.cat;
+        document.getElementById('map-gobernaciones').innerHTML='';
+        drawMapGobernaciones();
+      } else {
+        filtroAlc = btn.dataset.cat;
+        document.getElementById('map-alcaldias').innerHTML='';
+        drawMapAlcaldias();
+      }
+    });
+  });
+
   function drawMapRiesgo(){
     const el = document.getElementById('map-riesgo');
     const width = el.clientWidth, height = el.clientHeight;
@@ -963,11 +1142,15 @@ Promise.all([
     document.getElementById('map-conflictividad').innerHTML='';
     document.getElementById('map-riesgo').innerHTML='';
     document.getElementById('map-camara-ph').innerHTML='';
+    document.getElementById('map-gobernaciones').innerHTML='';
+    document.getElementById('map-alcaldias').innerHTML='';
     drawMapVotos();
     drawMapPolarizacion();
     drawMapConflictividad();
     drawMapRiesgo();
     drawMapCamaraPH();
+    drawMapGobernaciones();
+    drawMapAlcaldias();
   }
 
   drawAll();
