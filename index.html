@@ -1004,9 +1004,9 @@ Promise.all([
       .attr('d', path)
       .attr('fill', d=>{
         const v = gobernaciones[d.properties.dpt];
-        if(!v) return '#1c1e3a';
-        if(filtroGob!=='todas' && v.categoria!==filtroGob) return '#1c1e3a';
-        return catColor[v.categoria] || '#1c1e3a';
+        if(!v) return '#2c2f52';
+        if(filtroGob!=='todas' && v.categoria!==filtroGob) return '#2c2f52';
+        return catColor[v.categoria] || '#2c2f52';
       })
       .on('mousemove', (event,d)=>{
         const v = gobernaciones[d.properties.dpt];
@@ -1045,8 +1045,8 @@ Promise.all([
       .attr('d', path)
       .attr('fill', d=>{
         const v = alcaldiasPH[d.id];
-        if(!v) return '#1c1e3a';
-        if(filtroAlc!=='todas' && v.categoria!==filtroAlc) return '#1c1e3a';
+        if(!v) return '#2c2f52';
+        if(filtroAlc!=='todas' && v.categoria!==filtroAlc) return '#2c2f52';
         return v.categoria==='directo' ? '#84CC16' : '#E2A03A';
       })
       .on('mousemove', (event,d)=>{
