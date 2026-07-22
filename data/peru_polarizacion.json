@@ -1,0 +1,444 @@
+{
+  "AMAZONAS": {
+    "p16": 75.5,
+    "p21": 53.3,
+    "p26": 67.0,
+    "top2_2026": [
+      "sanchez",
+      "fujimori"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "ANCASH": {
+    "p16": 70.2,
+    "p21": 47.1,
+    "p26": 43.8,
+    "top2_2026": [
+      "fujimori",
+      "sanchez"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "APURIMAC": {
+    "p16": 86.2,
+    "p21": 71.0,
+    "p26": 68.0,
+    "top2_2026": [
+      "sanchez",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "lescano"
+    ],
+    "top2_2016": [
+      "mendoza",
+      "fujimori"
+    ]
+  },
+  "AREQUIPA": {
+    "p16": 57.8,
+    "p21": 59.6,
+    "p26": 39.3,
+    "top2_2026": [
+      "nieto",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "desoto"
+    ],
+    "top2_2016": [
+      "kuczynski",
+      "mendoza"
+    ]
+  },
+  "AYACUCHO": {
+    "p16": 88.2,
+    "p21": 68.8,
+    "p26": 58.1,
+    "top2_2026": [
+      "sanchez",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "mendoza",
+      "fujimori"
+    ]
+  },
+  "CAJAMARCA": {
+    "p16": 73.3,
+    "p21": 63.1,
+    "p26": 67.7,
+    "top2_2026": [
+      "sanchez",
+      "fujimori"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "CALLAO": {
+    "p16": 71.9,
+    "p21": 42.9,
+    "p26": 44.7,
+    "top2_2026": [
+      "fujimori",
+      "laliaga"
+    ],
+    "top2_2021": [
+      "fujimori",
+      "desoto"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "kuczynski"
+    ]
+  },
+  "CUSCO": {
+    "p16": 74.9,
+    "p21": 67.2,
+    "p26": 50.8,
+    "top2_2026": [
+      "sanchez",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "mendoza"
+    ],
+    "top2_2016": [
+      "mendoza",
+      "fujimori"
+    ]
+  },
+  "HUANCAVELICA": {
+    "p16": 85.5,
+    "p21": 76.0,
+    "p26": 70.7,
+    "top2_2026": [
+      "sanchez",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "lescano"
+    ],
+    "top2_2016": [
+      "mendoza",
+      "fujimori"
+    ]
+  },
+  "HUANUCO": {
+    "p16": 74.4,
+    "p21": 58.4,
+    "p26": 55.7,
+    "top2_2026": [
+      "sanchez",
+      "fujimori"
+    ],
+    "top2_2021": [
+      "castillo",
+      "aliaga"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "ICA": {
+    "p16": 64.5,
+    "p21": 40.7,
+    "p26": 41.9,
+    "top2_2026": [
+      "fujimori",
+      "alvarez"
+    ],
+    "top2_2021": [
+      "fujimori",
+      "castillo"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "JUNIN": {
+    "p16": 69.3,
+    "p21": 46.1,
+    "p26": 39.5,
+    "top2_2026": [
+      "fujimori",
+      "sanchez"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "LA LIBERTAD": {
+    "p16": 67.2,
+    "p21": 45.6,
+    "p26": 45.0,
+    "top2_2026": [
+      "fujimori",
+      "nieto"
+    ],
+    "top2_2021": [
+      "acuna",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "garcia"
+    ]
+  },
+  "LAMBAYEQUE": {
+    "p16": 70.3,
+    "p21": 44.1,
+    "p26": 48.1,
+    "top2_2026": [
+      "fujimori",
+      "sanchez"
+    ],
+    "top2_2021": [
+      "fujimori",
+      "aliaga"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "kuczynski"
+    ]
+  },
+  "LIMA": {
+    "p16": 73.5,
+    "p21": 44.5,
+    "p26": 46.7,
+    "top2_2026": [
+      "laliaga",
+      "fujimori"
+    ],
+    "top2_2021": [
+      "desoto",
+      "aliaga"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "kuczynski"
+    ]
+  },
+  "LORETO": {
+    "p16": 69.6,
+    "p21": 45.8,
+    "p26": 58.4,
+    "top2_2026": [
+      "fujimori",
+      "alvarez"
+    ],
+    "top2_2021": [
+      "fujimori",
+      "acuna"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "kuczynski"
+    ]
+  },
+  "MADRE DE DIOS": {
+    "p16": 77.0,
+    "p21": 58.1,
+    "p26": 51.0,
+    "top2_2026": [
+      "sanchez",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "MOQUEGUA": {
+    "p16": 62.6,
+    "p21": 61.2,
+    "p26": 39.3,
+    "top2_2026": [
+      "sanchez",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "lescano"
+    ],
+    "top2_2016": [
+      "mendoza",
+      "kuczynski"
+    ]
+  },
+  "PASCO": {
+    "p16": 68.5,
+    "p21": 55.6,
+    "p26": 51.0,
+    "top2_2026": [
+      "fujimori",
+      "sanchez"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "kuczynski"
+    ]
+  },
+  "PIURA": {
+    "p16": 74.5,
+    "p21": 45.6,
+    "p26": 50.9,
+    "top2_2026": [
+      "fujimori",
+      "sanchez"
+    ],
+    "top2_2021": [
+      "fujimori",
+      "acuna"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "PUNO": {
+    "p16": 80.9,
+    "p21": 82.1,
+    "p26": 65.0,
+    "top2_2026": [
+      "sanchez",
+      "belmont"
+    ],
+    "top2_2021": [
+      "castillo",
+      "lescano"
+    ],
+    "top2_2016": [
+      "mendoza",
+      "fujimori"
+    ]
+  },
+  "SAN MARTIN": {
+    "p16": 73.3,
+    "p21": 45.9,
+    "p26": 60.2,
+    "top2_2026": [
+      "sanchez",
+      "fujimori"
+    ],
+    "top2_2021": [
+      "castillo",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "TACNA": {
+    "p16": 68.6,
+    "p21": 58.3,
+    "p26": 38.9,
+    "top2_2026": [
+      "belmont",
+      "sanchez"
+    ],
+    "top2_2021": [
+      "castillo",
+      "lescano"
+    ],
+    "top2_2016": [
+      "mendoza",
+      "fujimori"
+    ]
+  },
+  "TUMBES": {
+    "p16": 79.3,
+    "p21": 56.8,
+    "p26": 63.4,
+    "top2_2026": [
+      "fujimori",
+      "alvarez"
+    ],
+    "top2_2021": [
+      "fujimori",
+      "acuna"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "kuczynski"
+    ]
+  },
+  "UCAYALI": {
+    "p16": 75.2,
+    "p21": 47.4,
+    "p26": 56.4,
+    "top2_2026": [
+      "fujimori",
+      "sanchez"
+    ],
+    "top2_2021": [
+      "fujimori",
+      "castillo"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "mendoza"
+    ]
+  },
+  "VOTO EXTRANJERO": {
+    "p16": 70.8,
+    "p21": 45.9,
+    "p26": 50.1,
+    "top2_2026": [
+      "laliaga",
+      "fujimori"
+    ],
+    "top2_2021": [
+      "aliaga",
+      "fujimori"
+    ],
+    "top2_2016": [
+      "fujimori",
+      "kuczynski"
+    ]
+  }
+}

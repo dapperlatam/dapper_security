@@ -1,0 +1,127 @@
+{
+  "LORETO": {
+    "total": 23,
+    "activo": 19,
+    "latente": 4
+  },
+  "PUNO": {
+    "total": 21,
+    "activo": 19,
+    "latente": 2
+  },
+  "ANCASH": {
+    "total": 17,
+    "activo": 9,
+    "latente": 8
+  },
+  "PIURA": {
+    "total": 14,
+    "activo": 14,
+    "latente": 0
+  },
+  "CUSCO": {
+    "total": 13,
+    "activo": 11,
+    "latente": 2
+  },
+  "APURIMAC": {
+    "total": 11,
+    "activo": 10,
+    "latente": 1
+  },
+  "JUNIN": {
+    "total": 10,
+    "activo": 10,
+    "latente": 0
+  },
+  "LIMA": {
+    "total": 15,
+    "activo": 9,
+    "latente": 6
+  },
+  "HUANUCO": {
+    "total": 8,
+    "activo": 8,
+    "latente": 0
+  },
+  "MOQUEGUA": {
+    "total": 7,
+    "activo": 6,
+    "latente": 1
+  },
+  "AMAZONAS": {
+    "total": 6,
+    "activo": 5,
+    "latente": 1
+  },
+  "PASCO": {
+    "total": 5,
+    "activo": 5,
+    "latente": 0
+  },
+  "HUANCAVELICA": {
+    "total": 5,
+    "activo": 5,
+    "latente": 0
+  },
+  "AYACUCHO": {
+    "total": 4,
+    "activo": 4,
+    "latente": 0
+  },
+  "AREQUIPA": {
+    "total": 4,
+    "activo": 2,
+    "latente": 2
+  },
+  "LA LIBERTAD": {
+    "total": 4,
+    "activo": 3,
+    "latente": 1
+  },
+  "UCAYALI": {
+    "total": 3,
+    "activo": 3,
+    "latente": 0
+  },
+  "TUMBES": {
+    "total": 3,
+    "activo": 1,
+    "latente": 2
+  },
+  "CAJAMARCA": {
+    "total": 2,
+    "activo": 2,
+    "latente": 0
+  },
+  "SAN MARTIN": {
+    "total": 1,
+    "activo": 1,
+    "latente": 0
+  },
+  "LAMBAYEQUE": {
+    "total": 1,
+    "activo": 1,
+    "latente": 0
+  },
+  "MADRE DE DIOS": {
+    "total": 1,
+    "activo": 1,
+    "latente": 0
+  },
+  "ICA": {
+    "total": 1,
+    "activo": 1,
+    "latente": 0
+  },
+  "TACNA": {
+    "total": 0,
+    "activo": 0,
+    "latente": 0
+  },
+  "CALLAO": {
+    "total": 0,
+    "activo": 0,
+    "latente": 0
+  }
+}

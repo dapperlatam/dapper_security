@@ -1,0 +1,262 @@
+{
+  "AMAZONAS": {
+    "depto": "Amazonas",
+    "fujimori": 69220,
+    "fujimori_pct": 35.54,
+    "sanchez": 125555,
+    "sanchez_pct": 64.46,
+    "winner": "sanchez",
+    "margin": -28.92,
+    "participacion_pct": 60.26
+  },
+  "ANCASH": {
+    "depto": "Ancash",
+    "fujimori": 270818,
+    "fujimori_pct": 43.37,
+    "sanchez": 353564,
+    "sanchez_pct": 56.63,
+    "winner": "sanchez",
+    "margin": -13.26,
+    "participacion_pct": 70.12
+  },
+  "APURIMAC": {
+    "depto": "Apurimac",
+    "fujimori": 43413,
+    "fujimori_pct": 18.82,
+    "sanchez": 187285,
+    "sanchez_pct": 81.18,
+    "winner": "sanchez",
+    "margin": -62.36,
+    "participacion_pct": 67.82
+  },
+  "AREQUIPA": {
+    "depto": "Arequipa",
+    "fujimori": 334264,
+    "fujimori_pct": 36.4,
+    "sanchez": 584000,
+    "sanchez_pct": 63.6,
+    "winner": "sanchez",
+    "margin": -27.2,
+    "participacion_pct": 79.8
+  },
+  "AYACUCHO": {
+    "depto": "Ayacucho",
+    "fujimori": 67502,
+    "fujimori_pct": 20.71,
+    "sanchez": 258505,
+    "sanchez_pct": 79.29,
+    "winner": "sanchez",
+    "margin": -58.58,
+    "participacion_pct": 66.18
+  },
+  "CAJAMARCA": {
+    "depto": "Cajamarca",
+    "fujimori": 246039,
+    "fujimori_pct": 33.24,
+    "sanchez": 494097,
+    "sanchez_pct": 66.76,
+    "winner": "sanchez",
+    "margin": -33.52,
+    "participacion_pct": 66.57
+  },
+  "CALLAO": {
+    "depto": "Callao",
+    "fujimori": 403845,
+    "fujimori_pct": 65.6,
+    "sanchez": 211803,
+    "sanchez_pct": 34.4,
+    "winner": "fujimori",
+    "margin": 31.2,
+    "participacion_pct": 76.94
+  },
+  "CUSCO": {
+    "depto": "Cusco",
+    "fujimori": 167218,
+    "fujimori_pct": 21.89,
+    "sanchez": 596621,
+    "sanchez_pct": 78.11,
+    "winner": "sanchez",
+    "margin": -56.22,
+    "participacion_pct": 71.97
+  },
+  "HUANCAVELICA": {
+    "depto": "Huancavelica",
+    "fujimori": 37004,
+    "fujimori_pct": 18.6,
+    "sanchez": 161991,
+    "sanchez_pct": 81.4,
+    "winner": "sanchez",
+    "margin": -62.8,
+    "participacion_pct": 62.01
+  },
+  "HUANUCO": {
+    "depto": "Huanuco",
+    "fujimori": 140904,
+    "fujimori_pct": 35.84,
+    "sanchez": 252225,
+    "sanchez_pct": 64.16,
+    "winner": "sanchez",
+    "margin": -28.32,
+    "participacion_pct": 64.21
+  },
+  "ICA": {
+    "depto": "Ica",
+    "fujimori": 282464,
+    "fujimori_pct": 51.94,
+    "sanchez": 261387,
+    "sanchez_pct": 48.06,
+    "winner": "fujimori",
+    "margin": 3.88,
+    "participacion_pct": 80.71
+  },
+  "JUNIN": {
+    "depto": "Junin",
+    "fujimori": 323824,
+    "fujimori_pct": 45.07,
+    "sanchez": 394718,
+    "sanchez_pct": 54.93,
+    "winner": "sanchez",
+    "margin": -9.86,
+    "participacion_pct": 72.33
+  },
+  "LA LIBERTAD": {
+    "depto": "La Libertad",
+    "fujimori": 604436,
+    "fujimori_pct": 57.56,
+    "sanchez": 445569,
+    "sanchez_pct": 42.44,
+    "winner": "fujimori",
+    "margin": 15.12,
+    "participacion_pct": 73.21
+  },
+  "LAMBAYEQUE": {
+    "depto": "Lambayeque",
+    "fujimori": 437358,
+    "fujimori_pct": 58.85,
+    "sanchez": 305863,
+    "sanchez_pct": 41.15,
+    "winner": "fujimori",
+    "margin": 17.7,
+    "participacion_pct": 76.47
+  },
+  "LIMA": {
+    "depto": "Lima",
+    "fujimori": 4072836,
+    "fujimori_pct": 63.51,
+    "sanchez": 2340068,
+    "sanchez_pct": 36.49,
+    "winner": "fujimori",
+    "margin": 27.02,
+    "participacion_pct": 78.97
+  },
+  "LORETO": {
+    "depto": "Loreto",
+    "fujimori": 214215,
+    "fujimori_pct": 53.0,
+    "sanchez": 189943,
+    "sanchez_pct": 47.0,
+    "winner": "fujimori",
+    "margin": 6.0,
+    "participacion_pct": 55.91
+  },
+  "MADRE DE DIOS": {
+    "depto": "Madre de Dios",
+    "fujimori": 29401,
+    "fujimori_pct": 30.8,
+    "sanchez": 66058,
+    "sanchez_pct": 69.2,
+    "winner": "sanchez",
+    "margin": -38.4,
+    "participacion_pct": 68.18
+  },
+  "MOQUEGUA": {
+    "depto": "Moquegua",
+    "fujimori": 33495,
+    "fujimori_pct": 27.44,
+    "sanchez": 88558,
+    "sanchez_pct": 72.56,
+    "winner": "sanchez",
+    "margin": -45.12,
+    "participacion_pct": 78.58
+  },
+  "PASCO": {
+    "depto": "Pasco",
+    "fujimori": 51747,
+    "fujimori_pct": 39.3,
+    "sanchez": 79930,
+    "sanchez_pct": 60.7,
+    "winner": "sanchez",
+    "margin": -21.4,
+    "participacion_pct": 63.06
+  },
+  "PIURA": {
+    "depto": "Piura",
+    "fujimori": 590489,
+    "fujimori_pct": 57.02,
+    "sanchez": 445100,
+    "sanchez_pct": 42.98,
+    "winner": "fujimori",
+    "margin": 14.04,
+    "participacion_pct": 73.31
+  },
+  "PUNO": {
+    "depto": "Puno",
+    "fujimori": 96486,
+    "fujimori_pct": 13.59,
+    "sanchez": 613281,
+    "sanchez_pct": 86.41,
+    "winner": "sanchez",
+    "margin": -72.82,
+    "participacion_pct": 77.4
+  },
+  "SAN MARTIN": {
+    "depto": "San Martin",
+    "fujimori": 219293,
+    "fujimori_pct": 45.36,
+    "sanchez": 264127,
+    "sanchez_pct": 54.64,
+    "winner": "sanchez",
+    "margin": -9.28,
+    "participacion_pct": 72.21
+  },
+  "TACNA": {
+    "depto": "Tacna",
+    "fujimori": 66335,
+    "fujimori_pct": 28.67,
+    "sanchez": 165063,
+    "sanchez_pct": 71.33,
+    "winner": "sanchez",
+    "margin": -42.66,
+    "participacion_pct": 80.91
+  },
+  "TUMBES": {
+    "depto": "Tumbes",
+    "fujimori": 82280,
+    "fujimori_pct": 64.38,
+    "sanchez": 45530,
+    "sanchez_pct": 35.62,
+    "winner": "fujimori",
+    "margin": 28.76,
+    "participacion_pct": 76.43
+  },
+  "UCAYALI": {
+    "depto": "Ucayali",
+    "fujimori": 143122,
+    "fujimori_pct": 52.56,
+    "sanchez": 129181,
+    "sanchez_pct": 47.43,
+    "winner": "fujimori",
+    "margin": 5.13,
+    "participacion_pct": 64.1
+  },
+  "VOTO EXTRANJERO": {
+    "depto": "Voto extranjero",
+    "fujimori": 195388,
+    "fujimori_pct": 63.2,
+    "sanchez": 113733,
+    "sanchez_pct": 36.79,
+    "winner": "fujimori",
+    "margin": 26.41,
+    "participacion_pct": 27.22
+  }
+}
