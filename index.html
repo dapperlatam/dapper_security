@@ -651,6 +651,31 @@
       </div>
 
     </div>
+
+    <div class="section-sub">Representación legislativa: Juntos por el Perú en la Cámara de Diputados</div>
+    <div class="card" style="min-height:auto;">
+      <h3>Curules por distrito electoral (elecciones parlamentarias, abril 2026)</h3>
+      <p class="desc">Juntos por el Perú es liderado por Roberto Sánchez, la misma figura que en la presidencial habla de desobediencia civil — es el equivalente funcional al Pacto Histórico de Colombia para efectos de este análisis. El mapa muestra dónde el partido ya tiene bancada instalada en el Congreso, más allá del resultado presidencial.</p>
+
+      <div class="method-note">
+        <b>JP primera fuerza:</b> Juntos por el Perú tiene más curules que cualquier otro partido en ese distrito (Apurímac, Ayacucho, Cajamarca, Cusco, Huancavelica, Huánuco, Madre de Dios, Moquegua, Puno, San Martín).<br><br>
+        <b>JP con representación:</b> tiene una o más curules, pero no es el partido con más escaños del distrito (Áncash, Arequipa, Junín, La Libertad, Lambayeque, Lima, Loreto, Tacna, Ucayali).<br><br>
+        <b>Sin representación de JP:</b> no obtuvo ninguna curul en ese distrito (Amazonas, Callao, Ica, Pasco, Piura, Tumbes).
+      </div>
+      <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
+        No se identifica aquí el "partido más votado" con el dato exacto de porcentaje de voto (no se consiguió una fuente confiable desagregada por distrito). En su lugar, se usa el partido con más curules como aproximación: bajo el método D'Hondt, el primer escaño de cada distrito casi siempre lo obtiene el partido más votado, por lo que esta es una inferencia razonable, no una confirmación exacta. Lima Metropolitana y Lima Provincias se suman en un solo valor de Lima. El distrito de Residentes en el Extranjero (2 curules, ninguna de JP) no tiene polígono y no está incluido en el mapa.
+      </div>
+
+      <div class="mapwrap" id="map-congreso-pe" style="min-height:480px;"></div>
+      <div class="legend">
+        <span><span class="swatch" style="background:#84CC16"></span>JP primera fuerza</span>
+        <span><span class="swatch" style="background:#7861DB"></span>JP con representación</span>
+        <span><span class="swatch" style="background:#2c2f52"></span>Sin representación de JP</span>
+      </div>
+      <div class="stat-row" id="stats-congreso-pe"></div>
+      <footer class="source">Fuente: Jurado Nacional de Elecciones (JNE), proclamación oficial de diputados electos, período 2026-2031.</footer>
+    </div>
+
     </div>
 
   </section>
@@ -866,8 +891,9 @@ Promise.all([
   fetch('data/peru_depts.json').then(r=>r.json()),
   fetch('data/peru_votes.json').then(r=>r.json()),
   fetch('data/peru_polarizacion.json').then(r=>r.json()),
-  fetch('data/peru_conflictividad.json').then(r=>r.json())
-]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara, gobernaciones, alcaldiasPH, peruDepts, peruVotes, peruPolarizacion, peruConflictividad])=>{
+  fetch('data/peru_conflictividad.json').then(r=>r.json()),
+  fetch('data/peru_congreso_jp.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara, gobernaciones, alcaldiasPH, peruDepts, peruVotes, peruPolarizacion, peruConflictividad, peruCongreso])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
   const depts = topojson.feature(topo, topo.objects.depts);
@@ -1338,6 +1364,48 @@ Promise.all([
     `;
   }
 
+  function drawMapCongresoPeru(){
+    const el = document.getElementById('map-congreso-pe');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], peruFeatures);
+    const path = d3.geoPath(projection);
+
+    const catColor = { primera_fuerza:'#84CC16', representacion:'#7861DB', sin_jp:'#2c2f52' };
+
+    svg.selectAll('path')
+      .data(peruFeatures.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = peruCongreso[d.properties.NOMBDEP];
+        if(!v) return '#2c2f52';
+        return catColor[v.categoria] || '#2c2f52';
+      })
+      .on('mousemove', (event,d)=>{
+        const v = peruCongreso[d.properties.NOMBDEP];
+        if(!v){ hideTip(); return; }
+        const catLabel = {primera_fuerza:'JP primera fuerza', representacion:'JP con representación', sin_jp:'Sin representación de JP'}[v.categoria];
+        const html = `<div class="t-title">${d.properties.NOMBDEP}</div>
+          <div class="t-row"><span>Categoría</span><span>${catLabel}</span></div>
+          <div class="t-row"><span>Curules JP / total</span><span>${v.curules_jp} / ${v.curules_totales} (${v.pct_jp}%)</span></div>
+          <div class="t-row"><span>Partido con más curules</span><span>${v.partido_mas_escanos} (${v.escanos_partido_mas_escanos})</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(peruCongreso);
+    const totalJP = vals.reduce((a,v)=>a+v.curules_jp,0);
+    const nPrimera = vals.filter(v=>v.categoria==='primera_fuerza').length;
+    const nRep = vals.filter(v=>v.categoria==='representacion').length;
+    document.getElementById('stats-congreso-pe').innerHTML = `
+      <div class="stat"><b>${totalJP}</b>Curules totales de JP en Diputados</div>
+      <div class="stat" style="border-color:#84CC16;"><b>${nPrimera}</b>Distritos donde JP es primera fuerza</div>
+      <div class="stat" style="border-color:#7861DB;"><b>${nRep}</b>Distritos con representación de JP</div>
+    `;
+  }
+
   function drawAllColombia(){
     document.getElementById('map-votos').innerHTML='';
     document.getElementById('map-polarizacion').innerHTML='';
@@ -1359,9 +1427,11 @@ Promise.all([
     document.getElementById('map-votos-pe').innerHTML='';
     document.getElementById('map-polarizacion-pe').innerHTML='';
     document.getElementById('map-conflictividad-pe').innerHTML='';
+    document.getElementById('map-congreso-pe').innerHTML='';
     drawMapVotosPeru();
     drawMapPolarizacionPeru();
     drawMapConflictividadPeru();
+    drawMapCongresoPeru();
   }
 
   let paisActivo = 'colombia';
