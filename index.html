@@ -818,37 +818,97 @@
   <section class="panel" id="t3">
     <div class="panel-head">
       <h2>Riesgo territorial</h2>
-      <p>Clasificación de riesgo por municipio, combinando el resultado electoral, el nivel de polarización y la conflictividad social departamental de 2025.</p>
+      <p>Cruce de dos dimensiones independientes: qué tan propicio es el terreno social/electoral para que un llamado a la desobediencia civil encuentre eco, y qué tanta estructura política organizada existe para convertir ese eco en movilización real. No es un solo número: es una matriz de dos ejes.</p>
     </div>
 
-    <div class="chart-grid" style="grid-template-columns:2fr 1fr;">
-      <div class="chart-card">
-        <h4>Mapa de riesgo territorial</h4>
-        <p class="desc">Cada municipio clasificado en riesgo alto, medio o bajo.</p>
-        <div class="mapwrap" id="map-riesgo" style="min-height:560px;"></div>
-        <div class="legend">
-          <span><span class="swatch" style="background:#2c2f52"></span>Bajo</span>
-          <span><span class="swatch" style="background:#E2A03A"></span>Medio</span>
-          <span><span class="swatch" style="background:#E34948"></span>Alto</span>
-        </div>
-        <div class="stat-row" id="stats-riesgo"></div>
-        <footer class="source">Fuente: Dapper, análisis propio a partir de Registraduría Nacional y Defensoría del Pueblo.</footer>
-      </div>
+    <div class="filter-row">
+      <button class="filter-btn country-btn-t3 active" data-country="colombia">Colombia</button>
+      <button class="filter-btn country-btn-t3" data-country="peru">Perú</button>
+    </div>
 
-      <div class="chart-card">
-        <h4>Metodología de la clasificación</h4>
-        <p class="desc">Puntaje aditivo por municipio, sobre un máximo de 6 puntos.</p>
+    <div class="card" style="min-height:auto;">
+      <h3>Qué mide cada eje</h3>
+      <div id="dims-colombia">
         <div class="method-note">
-          <b>Ganador:</b> Cepeda = +2 puntos. Abelardo = +0 puntos.<br><br>
-          <b>Polarización</b> (terciles nacionales del share top-2 en primera vuelta 2026): baja = +0, media = +1, alta = +2. Cortes: ≤84,4% baja, 84,4-89,6% media, &gt;89,6% alta.<br><br>
-          <b>Conflictividad 2025</b> (terciles departamentales, mismo valor para todos los municipios del departamento): bajo = +0, medio = +1, alto = +2. Cortes: ≤63 eventos bajo, 63-142 medio, &gt;142 alto.<br><br>
-          <b>Clasificación final:</b> 0-1 puntos = riesgo bajo. 2-4 puntos = riesgo medio. 5-6 puntos = riesgo alto.
+          <b>Eje horizontal — Riesgo social (a nivel municipio):</b> qué tan propicio está el terreno para que la simpatía por el Pacto Histórico se traduzca en movilización. Se construye con tres variables: (1) <i>ganador</i> de la segunda vuelta presidencial en ese municipio (Cepeda suma, Abelardo no resta); (2) <i>polarización electoral</i>, qué tan concentrado está el voto en los dos candidatos más votados en primera vuelta (terciles nacionales); (3) <i>conflictividad social 2025</i>, número de eventos registrados por la Defensoría del Pueblo (terciles departamentales, heredado a los municipios de ese departamento). Los tres se suman en un puntaje de 0 a 6, clasificado en <b>bajo (0-1), medio (2-4) o alto (5-6)</b>.
+        </div>
+        <div class="method-note" style="border-left-color:var(--purple-light);">
+          <b>Eje vertical — Capacidad institucional (a nivel departamento):</b> si existe estructura política del Pacto Histórico capaz de organizar esa simpatía, más allá del voto. Se construye con tres variables: (1) <i>bancada en la Cámara de Representantes</i> (dominio = 2 puntos, presencia sin mayoría de voto o voto sin bancada proporcional = 1, sin representación = 0); (2) <i>gobernación</i> (directa = 2, alianza = 1, ninguna = 0); (3) <i>número de alcaldías</i> del movimiento o sus aliados en ese departamento (3 o más = 2, 1-2 = 1, ninguna = 0). Suma máxima de 6 puntos, clasificado en <b>baja (0-1), media (2-3) o alta (4-6)</b>.
+        </div>
+      </div>
+      <div id="dims-peru" style="display:none;">
+        <div class="method-note">
+          <b>Eje horizontal — Riesgo social (a nivel departamento):</b> con los datos disponibles para Perú, se construye con dos variables: (1) <i>polarización electoral</i>, concentración del voto en los dos candidatos más votados en primera vuelta 2026 (terciles departamentales); (2) <i>conflictividad social</i>, número de conflictos activos y latentes registrados por la Defensoría del Pueblo del Perú a abril de 2026 (terciles departamentales). Suma de 0 a 4, clasificado en <b>bajo (0-1), medio (2) o alto (3-4)</b>.
+        </div>
+        <div class="method-note" style="border-left-color:var(--purple-light);">
+          <b>Eje vertical — Capacidad institucional (a nivel departamento):</b> por ahora solo se cuenta con una variable — la <i>representación de Juntos por el Perú en la Cámara de Diputados</i> (primera fuerza = 2 puntos, con representación sin ser primera fuerza = 1, sin representación = 0) — clasificado directamente en <b>baja (0), media (1) o alta (2)</b>. A diferencia de Colombia, no se incluyen todavía gobernaciones ni alcaldías porque esos datos quedaron pendientes de conseguir.
+        </div>
+      </div>
+      <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
+        Esta sigue siendo una hipótesis de trabajo para priorizar el monitoreo territorial, no una predicción ni un modelo estadístico. Los puntos de corte y el peso de cada variable son decisiones de diseño abiertas a la calibración de Jairo García y Enrique.
+      </div>
+    </div>
+
+    <div id="riesgo-colombia">
+      <div class="map-grid">
+        <div class="card">
+          <h3>Matriz de clasificación</h3>
+          <p class="desc">Cada celda cruza un nivel de capacidad institucional con un nivel de riesgo social. El número es la cantidad de municipios colombianos en esa combinación.</p>
+          <div id="matrix-co"></div>
+        </div>
+        <div class="card">
+          <h3>Mapa de riesgo territorial</h3>
+          <p class="desc">Cada municipio coloreado según la celda de la matriz en la que cae, combinando su propio riesgo social con la capacidad institucional de su departamento.</p>
+          <div class="mapwrap" id="map-riesgo-co" style="min-height:520px;"></div>
+          <div class="stat-row" id="stats-riesgo-co"></div>
+        </div>
+      </div>
+      <div class="card" style="min-height:auto;">
+        <div class="legend">
+          <span><span class="swatch" style="background:#E34948"></span>Prioridad máxima</span>
+          <span><span class="swatch" style="background:#E2841A"></span>Prioridad alta</span>
+          <span><span class="swatch" style="background:#E2A03A"></span>Prioridad media</span>
+          <span><span class="swatch" style="background:#7861DB"></span>Vigilar</span>
+          <span><span class="swatch" style="background:#C2548A"></span>Riesgo difuso</span>
+          <span><span class="swatch" style="background:#2c2f52"></span>Monitoreo rutinario</span>
+        </div>
+        <div class="method-note">
+          <b>Prioridad máxima:</b> hay terreno social favorable Y estructura para organizarlo — el escenario de mayor atención. <b>Prioridad alta:</b> falta uno de los dos factores en su nivel más alto, pero ambos están presentes de forma relevante. <b>Prioridad media:</b> ambos factores en nivel moderado. <b>Vigilar:</b> hay estructura instalada pero el terreno social todavía no muestra el detonante — capacidad latente. <b>Riesgo difuso:</b> hay terreno social favorable pero sin estructura organizativa clara que lo canalice — riesgo espontáneo, no necesariamente sostenido. <b>Monitoreo rutinario:</b> ninguno de los dos factores es alto.
+        </div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre Registraduría Nacional del Estado Civil y Defensoría del Pueblo.</footer>
+      </div>
+    </div>
+
+    <div id="riesgo-peru" style="display:none;">
+      <div class="map-grid">
+        <div class="card">
+          <h3>Matriz de clasificación</h3>
+          <p class="desc">Cada celda cruza un nivel de capacidad institucional con un nivel de riesgo social. El número es la cantidad de departamentos peruanos en esa combinación.</p>
+          <div id="matrix-pe"></div>
+        </div>
+        <div class="card">
+          <h3>Mapa de riesgo territorial</h3>
+          <p class="desc">Cada departamento coloreado según la celda de la matriz en la que cae.</p>
+          <div class="mapwrap" id="map-riesgo-pe" style="min-height:520px;"></div>
+          <div class="stat-row" id="stats-riesgo-pe"></div>
+        </div>
+      </div>
+      <div class="card" style="min-height:auto;">
+        <div class="legend">
+          <span><span class="swatch" style="background:#E34948"></span>Prioridad máxima</span>
+          <span><span class="swatch" style="background:#E2841A"></span>Prioridad alta</span>
+          <span><span class="swatch" style="background:#E2A03A"></span>Prioridad media</span>
+          <span><span class="swatch" style="background:#7861DB"></span>Vigilar</span>
+          <span><span class="swatch" style="background:#C2548A"></span>Riesgo difuso</span>
+          <span><span class="swatch" style="background:#2c2f52"></span>Monitoreo rutinario</span>
         </div>
         <div class="method-note" style="border-left-color:var(--amber); background:rgba(226,160,58,0.08);">
-          Esta es una hipótesis de trabajo para priorizar el monitoreo territorial, no una predicción. Los puntos de corte y el peso de cada variable deben calibrarse con Jairo García y Enrique antes de usarse operativamente.
+          El eje de capacidad institucional en Perú es más delgado que en Colombia (solo Congreso, no gobernaciones ni alcaldías), así que esta matriz es preliminar. Se puede completar cuando se consigan los datos de elecciones regionales peruanas.
         </div>
+        <footer class="source">Fuente: Dapper, análisis propio sobre ONPE/JNE y Defensoría del Pueblo del Perú.</footer>
       </div>
     </div>
+
   </section>
 
 </main>
@@ -892,8 +952,10 @@ Promise.all([
   fetch('data/peru_votes.json').then(r=>r.json()),
   fetch('data/peru_polarizacion.json').then(r=>r.json()),
   fetch('data/peru_conflictividad.json').then(r=>r.json()),
-  fetch('data/peru_congreso_jp.json').then(r=>r.json())
-]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara, gobernaciones, alcaldiasPH, peruDepts, peruVotes, peruPolarizacion, peruConflictividad, peruCongreso])=>{
+  fetch('data/peru_congreso_jp.json').then(r=>r.json()),
+  fetch('data/co_matriz_riesgo.json').then(r=>r.json()),
+  fetch('data/peru_matriz_riesgo.json').then(r=>r.json())
+]).then(([topo, votes, polarizacion, conflictividad, riesgo, pactoCamara, gobernaciones, alcaldiasPH, peruDepts, peruVotes, peruPolarizacion, peruConflictividad, peruCongreso, coMatrizRiesgo, peruMatrizRiesgo])=>{
 
   const mpios = topojson.feature(topo, topo.objects.mpios);
   const depts = topojson.feature(topo, topo.objects.depts);
@@ -1184,14 +1246,60 @@ Promise.all([
     });
   });
 
-  function drawMapRiesgo(){
-    const el = document.getElementById('map-riesgo');
+  const CAT_COLOR = {
+    prioridad_maxima:'#E34948', prioridad_alta:'#E2841A', prioridad_media:'#E2A03A',
+    vigilar:'#7861DB', riesgo_difuso:'#C2548A', rutinario:'#2c2f52'
+  };
+  const CAT_LABEL = {
+    prioridad_maxima:'Prioridad máxima', prioridad_alta:'Prioridad alta', prioridad_media:'Prioridad media',
+    vigilar:'Vigilar', riesgo_difuso:'Riesgo difuso', rutinario:'Monitoreo rutinario'
+  };
+  const MATRIX_LABEL = {
+    alta:  {bajo:'vigilar', medio:'prioridad_alta', alto:'prioridad_maxima'},
+    media: {bajo:'rutinario', medio:'prioridad_media', alto:'prioridad_alta'},
+    baja:  {bajo:'rutinario', medio:'rutinario', alto:'riesgo_difuso'}
+  };
+
+  function buildMatrixSVG(containerId, unitsData, capField, riskField, unitWord){
+    const capLevels = ['alta','media','baja'];
+    const riskLevels = ['bajo','medio','alto'];
+    const counts = {};
+    capLevels.forEach(cap=>{ counts[cap]={}; riskLevels.forEach(r=>counts[cap][r]=0); });
+    Object.values(unitsData).forEach(v=>{
+      const cap = v[capField], risk = v[riskField];
+      if(counts[cap] && counts[cap][risk]!==undefined) counts[cap][risk]++;
+    });
+
+    const colW=140, colGap=8, rowH=90, rowGap=8;
+    const gridX0=90, gridY0=50;
+    let svg = `<svg width="100%" viewBox="0 0 600 ${gridY0 + capLevels.length*(rowH+rowGap) + 10}">`;
+    riskLevels.forEach((r,ci)=>{
+      const x = gridX0 + ci*(colW+colGap);
+      svg += `<text x="${x+colW/2}" y="30" text-anchor="middle" font-size="12" font-weight="500" fill="var(--text-mid)">Riesgo ${r}</text>`;
+    });
+    capLevels.forEach((cap,ri)=>{
+      const y = gridY0 + ri*(rowH+rowGap);
+      svg += `<text x="${gridX0-12}" y="${y+rowH/2}" text-anchor="end" dominant-baseline="central" font-size="12" font-weight="500" fill="var(--text-mid)">Cap. ${cap}</text>`;
+      riskLevels.forEach((risk,ci)=>{
+        const x = gridX0 + ci*(colW+colGap);
+        const label = MATRIX_LABEL[cap][risk];
+        const n = counts[cap][risk];
+        svg += `<rect x="${x}" y="${y}" width="${colW}" height="${rowH}" rx="8" fill="${CAT_COLOR[label]}" opacity="0.88"/>`;
+        svg += `<text x="${x+colW/2}" y="${y+34}" text-anchor="middle" font-size="20" font-weight="500" fill="#fff">${n}</text>`;
+        svg += `<text x="${x+colW/2}" y="${y+56}" text-anchor="middle" font-size="11" fill="#fff" opacity="0.9">${unitWord}</text>`;
+        svg += `<text x="${x+colW/2}" y="${y+74}" text-anchor="middle" font-size="10.5" fill="#fff" opacity="0.85">${CAT_LABEL[label]}</text>`;
+      });
+    });
+    svg += `</svg>`;
+    document.getElementById(containerId).innerHTML = svg;
+  }
+
+  function drawMapRiesgoColombia(){
+    const el = document.getElementById('map-riesgo-co');
     const width = el.clientWidth, height = el.clientHeight;
     const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
     const projection = d3.geoMercator().fitSize([width, height], mpios);
     const path = d3.geoPath(projection);
-
-    const colorMap = {bajo:'#2c2f52', medio:'#E2A03A', alto:'#E34948'};
 
     svg.selectAll('path')
       .data(mpios.features)
@@ -1199,41 +1307,90 @@ Promise.all([
       .attr('class','mpio-path')
       .attr('d', path)
       .attr('fill', d=>{
-        const v = riesgo[d.id];
-        if(!v || !v.riesgo) return '#1c1e3a';
-        return colorMap[v.riesgo];
-      })
-      .attr('opacity', d=>{
-        const v = riesgo[d.id];
-        if(!v || !v.riesgo) return 1;
-        return v.riesgo === 'alto' ? 1 : 0.75;
+        const v = coMatrizRiesgo[d.id];
+        if(!v) return '#2c2f52';
+        return CAT_COLOR[v.categoria_final];
       })
       .on('mousemove', (event,d)=>{
-        const v = riesgo[d.id];
-        if(!v || !v.riesgo){ hideTip(); return; }
-        const winnerLabel = v.winner==='cepeda' ? 'Cepeda' : 'Abelardo';
+        const v = coMatrizRiesgo[d.id];
+        if(!v){ hideTip(); return; }
         const html = `<div class="t-title">${v.mpio}</div>
           <div style="color:var(--text-dim); margin-bottom:6px;">${v.dpto}</div>
-          <div class="t-row"><span>Riesgo</span><span style="text-transform:capitalize">${v.riesgo}</span></div>
-          <div class="t-row"><span>Ganador</span><span>${winnerLabel}</span></div>
-          <div class="t-row"><span>Polarización</span><span>${v.polarizacion_nivel} (${v.p26}%)</span></div>
-          <div class="t-row"><span>Conflictividad</span><span>${v.conflicto_nivel} (${v.conflicto_eventos} ev.)</span></div>
-          <div class="t-row"><span>Puntaje</span><span>${v.score}/6</span></div>`;
+          <div class="t-row"><span>Clasificación</span><span>${CAT_LABEL[v.categoria_final]}</span></div>
+          <div class="t-row"><span>Riesgo social</span><span style="text-transform:capitalize">${v.riesgo_social}</span></div>
+          <div class="t-row"><span>Capacidad institucional</span><span style="text-transform:capitalize">${v.capacidad_institucional}</span></div>`;
         showTip(html, event.clientX, event.clientY);
       })
       .on('mouseleave', hideTip);
 
-    const vals = Object.values(riesgo).filter(v=>v.riesgo);
-    const total = vals.length;
-    const nAlto = vals.filter(v=>v.riesgo==='alto').length;
-    const nMedio = vals.filter(v=>v.riesgo==='medio').length;
-    const nBajo = vals.filter(v=>v.riesgo==='bajo').length;
-    document.getElementById('stats-riesgo').innerHTML = `
-      <div class="stat" style="border-color:#E34948;"><b>${nAlto}</b>Alto (${(nAlto/total*100).toFixed(0)}%)</div>
-      <div class="stat" style="border-color:#E2A03A;"><b>${nMedio}</b>Medio (${(nMedio/total*100).toFixed(0)}%)</div>
-      <div class="stat"><b>${nBajo}</b>Bajo (${(nBajo/total*100).toFixed(0)}%)</div>
+    const vals = Object.values(coMatrizRiesgo);
+    const nMax = vals.filter(v=>v.categoria_final==='prioridad_maxima').length;
+    const nAlta = vals.filter(v=>v.categoria_final==='prioridad_alta').length;
+    const nDifuso = vals.filter(v=>v.categoria_final==='riesgo_difuso').length;
+    document.getElementById('stats-riesgo-co').innerHTML = `
+      <div class="stat" style="border-color:#E34948;"><b>${nMax}</b>Prioridad máxima</div>
+      <div class="stat" style="border-color:#E2841A;"><b>${nAlta}</b>Prioridad alta</div>
+      <div class="stat" style="border-color:#C2548A;"><b>${nDifuso}</b>Riesgo difuso</div>
     `;
+    buildMatrixSVG('matrix-co', coMatrizRiesgo, 'capacidad_institucional', 'riesgo_social', 'municipios');
   }
+
+  function drawMapRiesgoPeru(){
+    const el = document.getElementById('map-riesgo-pe');
+    const width = el.clientWidth, height = el.clientHeight;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+    const projection = d3.geoMercator().fitSize([width, height], peruFeatures);
+    const path = d3.geoPath(projection);
+
+    svg.selectAll('path')
+      .data(peruFeatures.features)
+      .join('path')
+      .attr('class','mpio-path')
+      .attr('d', path)
+      .attr('fill', d=>{
+        const v = peruMatrizRiesgo[d.properties.NOMBDEP];
+        if(!v) return '#2c2f52';
+        return CAT_COLOR[v.categoria_final];
+      })
+      .on('mousemove', (event,d)=>{
+        const v = peruMatrizRiesgo[d.properties.NOMBDEP];
+        if(!v){ hideTip(); return; }
+        const html = `<div class="t-title">${d.properties.NOMBDEP}</div>
+          <div class="t-row"><span>Clasificación</span><span>${CAT_LABEL[v.categoria_final]}</span></div>
+          <div class="t-row"><span>Riesgo social</span><span style="text-transform:capitalize">${v.riesgo_social}</span></div>
+          <div class="t-row"><span>Capacidad institucional</span><span style="text-transform:capitalize">${v.capacidad_institucional}</span></div>`;
+        showTip(html, event.clientX, event.clientY);
+      })
+      .on('mouseleave', hideTip);
+
+    const vals = Object.values(peruMatrizRiesgo);
+    const nMax = vals.filter(v=>v.categoria_final==='prioridad_maxima').length;
+    const nAlta = vals.filter(v=>v.categoria_final==='prioridad_alta').length;
+    const nDifuso = vals.filter(v=>v.categoria_final==='riesgo_difuso').length;
+    document.getElementById('stats-riesgo-pe').innerHTML = `
+      <div class="stat" style="border-color:#E34948;"><b>${nMax}</b>Prioridad máxima</div>
+      <div class="stat" style="border-color:#E2841A;"><b>${nAlta}</b>Prioridad alta</div>
+      <div class="stat" style="border-color:#C2548A;"><b>${nDifuso}</b>Riesgo difuso</div>
+    `;
+    buildMatrixSVG('matrix-pe', peruMatrizRiesgo, 'capacidad_institucional', 'riesgo_social', 'deptos.');
+  }
+
+  document.querySelectorAll('.country-btn-t3').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.country-btn-t3').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const c = btn.dataset.country;
+      paisActivoT3 = c;
+      document.getElementById('dims-colombia').style.display = c==='colombia' ? '' : 'none';
+      document.getElementById('dims-peru').style.display = c==='peru' ? '' : 'none';
+      document.getElementById('riesgo-colombia').style.display = c==='colombia' ? '' : 'none';
+      document.getElementById('riesgo-peru').style.display = c==='peru' ? '' : 'none';
+      setTimeout(()=>{
+        if(c==='colombia'){ document.getElementById('map-riesgo-co').innerHTML=''; drawMapRiesgoColombia(); }
+        else { document.getElementById('map-riesgo-pe').innerHTML=''; drawMapRiesgoPeru(); }
+      }, 60);
+    });
+  });
 
   // ---------- Perú maps ----------
   function drawMapVotosPeru(){
@@ -1410,14 +1567,12 @@ Promise.all([
     document.getElementById('map-votos').innerHTML='';
     document.getElementById('map-polarizacion').innerHTML='';
     document.getElementById('map-conflictividad').innerHTML='';
-    document.getElementById('map-riesgo').innerHTML='';
     document.getElementById('map-camara-ph').innerHTML='';
     document.getElementById('map-gobernaciones').innerHTML='';
     document.getElementById('map-alcaldias').innerHTML='';
     drawMapVotos();
     drawMapPolarizacion();
     drawMapConflictividad();
-    drawMapRiesgo();
     drawMapCamaraPH();
     drawMapGobernaciones();
     drawMapAlcaldias();
@@ -1435,6 +1590,7 @@ Promise.all([
   }
 
   let paisActivo = 'colombia';
+  let paisActivoT3 = 'colombia';
 
   document.querySelectorAll('.country-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
@@ -1450,8 +1606,11 @@ Promise.all([
   });
 
   drawAllColombia();
+  drawMapRiesgoColombia();
   window.addEventListener('resize', ()=>{
     if(paisActivo==='colombia') drawAllColombia(); else drawAllPeru();
+    if(paisActivoT3==='colombia'){ document.getElementById('map-riesgo-co').innerHTML=''; drawMapRiesgoColombia(); }
+    else { document.getElementById('map-riesgo-pe').innerHTML=''; drawMapRiesgoPeru(); }
   });
 
 }).catch(err=>{
