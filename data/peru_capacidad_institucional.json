@@ -1,0 +1,127 @@
+{
+  "AMAZONAS": {
+    "congreso_categoria": "sin_jp",
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "ANCASH": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "APURIMAC": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "AREQUIPA": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "AYACUCHO": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "CAJAMARCA": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "CALLAO": {
+    "congreso_categoria": "sin_jp",
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "CUSCO": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "HUANCAVELICA": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "HUANUCO": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "ICA": {
+    "congreso_categoria": "sin_jp",
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "JUNIN": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "LA LIBERTAD": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "LAMBAYEQUE": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "LIMA": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "LORETO": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "MADRE DE DIOS": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "MOQUEGUA": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "PASCO": {
+    "congreso_categoria": "sin_jp",
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "PIURA": {
+    "congreso_categoria": "sin_jp",
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "PUNO": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "SAN MARTIN": {
+    "congreso_categoria": "primera_fuerza",
+    "score_total": 2,
+    "nivel": "alta"
+  },
+  "TACNA": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  },
+  "TUMBES": {
+    "congreso_categoria": "sin_jp",
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "UCAYALI": {
+    "congreso_categoria": "representacion",
+    "score_total": 1,
+    "nivel": "media"
+  }
+}

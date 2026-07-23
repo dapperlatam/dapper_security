@@ -1,0 +1,210 @@
+{
+  "AMAZONAS": {
+    "polarizacion_p26": 67.0,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 6,
+    "conflicto_nivel": "media",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "ANCASH": {
+    "polarizacion_p26": 43.8,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 17,
+    "conflicto_nivel": "alta",
+    "score": 2,
+    "riesgo": "medio"
+  },
+  "APURIMAC": {
+    "polarizacion_p26": 68.0,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 11,
+    "conflicto_nivel": "alta",
+    "score": 4,
+    "riesgo": "alto"
+  },
+  "AREQUIPA": {
+    "polarizacion_p26": 39.3,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 4,
+    "conflicto_nivel": "media",
+    "score": 1,
+    "riesgo": "bajo"
+  },
+  "AYACUCHO": {
+    "polarizacion_p26": 58.1,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 4,
+    "conflicto_nivel": "media",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "CAJAMARCA": {
+    "polarizacion_p26": 67.7,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 2,
+    "conflicto_nivel": "baja",
+    "score": 2,
+    "riesgo": "medio"
+  },
+  "CALLAO": {
+    "polarizacion_p26": 44.7,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 0,
+    "conflicto_nivel": "baja",
+    "score": 0,
+    "riesgo": "bajo"
+  },
+  "CUSCO": {
+    "polarizacion_p26": 50.8,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 13,
+    "conflicto_nivel": "alta",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "HUANCAVELICA": {
+    "polarizacion_p26": 70.7,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 5,
+    "conflicto_nivel": "media",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "HUANUCO": {
+    "polarizacion_p26": 55.7,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 8,
+    "conflicto_nivel": "alta",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "ICA": {
+    "polarizacion_p26": 41.9,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 1,
+    "conflicto_nivel": "baja",
+    "score": 0,
+    "riesgo": "bajo"
+  },
+  "JUNIN": {
+    "polarizacion_p26": 39.5,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 10,
+    "conflicto_nivel": "alta",
+    "score": 2,
+    "riesgo": "medio"
+  },
+  "LA LIBERTAD": {
+    "polarizacion_p26": 45.0,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 4,
+    "conflicto_nivel": "media",
+    "score": 1,
+    "riesgo": "bajo"
+  },
+  "LAMBAYEQUE": {
+    "polarizacion_p26": 48.1,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 1,
+    "conflicto_nivel": "baja",
+    "score": 1,
+    "riesgo": "bajo"
+  },
+  "LIMA": {
+    "polarizacion_p26": 46.7,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 15,
+    "conflicto_nivel": "alta",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "LORETO": {
+    "polarizacion_p26": 58.4,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 23,
+    "conflicto_nivel": "alta",
+    "score": 4,
+    "riesgo": "alto"
+  },
+  "MADRE DE DIOS": {
+    "polarizacion_p26": 51.0,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 1,
+    "conflicto_nivel": "baja",
+    "score": 1,
+    "riesgo": "bajo"
+  },
+  "MOQUEGUA": {
+    "polarizacion_p26": 39.3,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 7,
+    "conflicto_nivel": "media",
+    "score": 1,
+    "riesgo": "bajo"
+  },
+  "PASCO": {
+    "polarizacion_p26": 51.0,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 5,
+    "conflicto_nivel": "media",
+    "score": 2,
+    "riesgo": "medio"
+  },
+  "PIURA": {
+    "polarizacion_p26": 50.9,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 14,
+    "conflicto_nivel": "alta",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "PUNO": {
+    "polarizacion_p26": 65.0,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 21,
+    "conflicto_nivel": "alta",
+    "score": 4,
+    "riesgo": "alto"
+  },
+  "SAN MARTIN": {
+    "polarizacion_p26": 60.2,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 1,
+    "conflicto_nivel": "baja",
+    "score": 2,
+    "riesgo": "medio"
+  },
+  "TACNA": {
+    "polarizacion_p26": 38.9,
+    "polarizacion_nivel": "baja",
+    "conflicto_total": 0,
+    "conflicto_nivel": "baja",
+    "score": 0,
+    "riesgo": "bajo"
+  },
+  "TUMBES": {
+    "polarizacion_p26": 63.4,
+    "polarizacion_nivel": "alta",
+    "conflicto_total": 3,
+    "conflicto_nivel": "media",
+    "score": 3,
+    "riesgo": "alto"
+  },
+  "UCAYALI": {
+    "polarizacion_p26": 56.4,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 3,
+    "conflicto_nivel": "media",
+    "score": 2,
+    "riesgo": "medio"
+  },
+  "VOTO EXTRANJERO": {
+    "polarizacion_p26": 50.1,
+    "polarizacion_nivel": "media",
+    "conflicto_total": 0,
+    "conflicto_nivel": "baja",
+    "score": 1,
+    "riesgo": "bajo"
+  }
+}

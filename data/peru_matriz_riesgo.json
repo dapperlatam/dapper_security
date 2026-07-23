@@ -1,0 +1,132 @@
+{
+  "AMAZONAS": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "baja",
+    "categoria_final": "riesgo_difuso"
+  },
+  "ANCASH": {
+    "riesgo_social": "medio",
+    "capacidad_institucional": "media",
+    "categoria_final": "prioridad_media"
+  },
+  "APURIMAC": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_maxima"
+  },
+  "AREQUIPA": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "media",
+    "categoria_final": "rutinario"
+  },
+  "AYACUCHO": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_maxima"
+  },
+  "CAJAMARCA": {
+    "riesgo_social": "medio",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_alta"
+  },
+  "CALLAO": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "baja",
+    "categoria_final": "rutinario"
+  },
+  "CUSCO": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_maxima"
+  },
+  "HUANCAVELICA": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_maxima"
+  },
+  "HUANUCO": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_maxima"
+  },
+  "ICA": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "baja",
+    "categoria_final": "rutinario"
+  },
+  "JUNIN": {
+    "riesgo_social": "medio",
+    "capacidad_institucional": "media",
+    "categoria_final": "prioridad_media"
+  },
+  "LA LIBERTAD": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "media",
+    "categoria_final": "rutinario"
+  },
+  "LAMBAYEQUE": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "media",
+    "categoria_final": "rutinario"
+  },
+  "LIMA": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "media",
+    "categoria_final": "prioridad_alta"
+  },
+  "LORETO": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "media",
+    "categoria_final": "prioridad_alta"
+  },
+  "MADRE DE DIOS": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "alta",
+    "categoria_final": "vigilar"
+  },
+  "MOQUEGUA": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "alta",
+    "categoria_final": "vigilar"
+  },
+  "PASCO": {
+    "riesgo_social": "medio",
+    "capacidad_institucional": "baja",
+    "categoria_final": "rutinario"
+  },
+  "PIURA": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "baja",
+    "categoria_final": "riesgo_difuso"
+  },
+  "PUNO": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_maxima"
+  },
+  "SAN MARTIN": {
+    "riesgo_social": "medio",
+    "capacidad_institucional": "alta",
+    "categoria_final": "prioridad_alta"
+  },
+  "TACNA": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "media",
+    "categoria_final": "rutinario"
+  },
+  "TUMBES": {
+    "riesgo_social": "alto",
+    "capacidad_institucional": "baja",
+    "categoria_final": "riesgo_difuso"
+  },
+  "UCAYALI": {
+    "riesgo_social": "medio",
+    "capacidad_institucional": "media",
+    "categoria_final": "prioridad_media"
+  },
+  "VOTO EXTRANJERO": {
+    "riesgo_social": "bajo",
+    "capacidad_institucional": "baja",
+    "categoria_final": "rutinario"
+  }
+}

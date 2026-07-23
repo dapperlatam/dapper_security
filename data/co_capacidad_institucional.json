@@ -1,0 +1,332 @@
+{
+  "ANTIOQUIA": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "ATLANTICO": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 2,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "SANTAFE DE BOGOTA D.C": {
+    "congreso_categoria": "dominio",
+    "congreso_score": 2,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "BOLIVAR": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "BOYACA": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 3,
+    "alcaldias_score": 2,
+    "score_total": 3,
+    "nivel": "media"
+  },
+  "CALDAS": {
+    "congreso_categoria": "subrepresentada",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "CAQUETA": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "CAUCA": {
+    "congreso_categoria": "dominio",
+    "congreso_score": 2,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 12,
+    "alcaldias_score": 2,
+    "score_total": 4,
+    "nivel": "alta"
+  },
+  "CESAR": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "CORDOBA": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 2,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "CUNDINAMARCA": {
+    "congreso_categoria": "dominio",
+    "congreso_score": 2,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "CHOCO": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "HUILA": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "LA GUAJIRA": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "MAGDALENA": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": "alianza",
+    "gobernacion_score": 1,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 3,
+    "nivel": "media"
+  },
+  "META": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "NARIÑO": {
+    "congreso_categoria": "dominio",
+    "congreso_score": 2,
+    "gobernacion_categoria": "directo",
+    "gobernacion_score": 2,
+    "alcaldias_n": 5,
+    "alcaldias_score": 2,
+    "score_total": 6,
+    "nivel": "alta"
+  },
+  "NORTE DE SANTANDER": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "QUINDIO": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "RISARALDA": {
+    "congreso_categoria": "subrepresentada",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "SANTANDER": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "SUCRE": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "TOLIMA": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 10,
+    "alcaldias_score": 2,
+    "score_total": 3,
+    "nivel": "media"
+  },
+  "VALLE DEL CAUCA": {
+    "congreso_categoria": "dominio",
+    "congreso_score": 2,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 3,
+    "alcaldias_score": 2,
+    "score_total": 4,
+    "nivel": "alta"
+  },
+  "ARAUCA": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 2,
+    "alcaldias_score": 1,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "CASANARE": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": "alianza",
+    "gobernacion_score": 1,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "PUTUMAYO": {
+    "congreso_categoria": "institucional",
+    "congreso_score": 1,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 2,
+    "alcaldias_score": 1,
+    "score_total": 2,
+    "nivel": "media"
+  },
+  "AMAZONAS": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": "alianza",
+    "gobernacion_score": 1,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "GUAINIA": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "GUAVIARE": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "VAUPES": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 0,
+    "nivel": "baja"
+  },
+  "VICHADA": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 1,
+    "alcaldias_score": 1,
+    "score_total": 1,
+    "nivel": "baja"
+  },
+  "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA": {
+    "congreso_categoria": "sin_ph",
+    "congreso_score": 0,
+    "gobernacion_categoria": null,
+    "gobernacion_score": 0,
+    "alcaldias_n": 0,
+    "alcaldias_score": 0,
+    "score_total": 0,
+    "nivel": "baja"
+  }
+}
